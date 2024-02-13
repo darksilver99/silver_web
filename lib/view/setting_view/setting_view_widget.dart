@@ -239,7 +239,6 @@ class _SettingViewWidgetState extends State<SettingViewWidget> {
                                                         _model.withdrawCredit,
                                                     type: 'ถอน',
                                                   ));
-                                              Navigator.pop(context);
                                             } else {
                                               await showDialog(
                                                 context: context,
