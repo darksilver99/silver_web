@@ -36,26 +36,17 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       initialLocation: '/',
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
-      errorBuilder: (context, state) => HomePageWidget(),
+      errorBuilder: (context, state) => MainPageWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) => HomePageWidget(),
+          builder: (context, _) => MainPageWidget(),
         ),
         FFRoute(
-          name: 'HomePage',
-          path: '/homePage',
-          builder: (context, params) => HomePageWidget(
-            pageName: params.getParam('pageName', ParamType.String),
-          ),
-        ),
-        FFRoute(
-          name: 'SettingPage',
-          path: '/settingPage',
-          builder: (context, params) => SettingPageWidget(
-            pageName: params.getParam('pageName', ParamType.String),
-          ),
+          name: 'MainPage',
+          path: '/mainPage',
+          builder: (context, params) => MainPageWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
