@@ -736,6 +736,7 @@ class _AuthenPageWidgetState extends State<AuthenPageWidget> {
                                                       .textController2.text,
                                                   createdTime:
                                                       getCurrentTimestamp,
+                                                  credit: 1000.0,
                                                 ));
 
                                             context.goNamedAuth(
