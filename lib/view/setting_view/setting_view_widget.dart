@@ -87,14 +87,21 @@ class _SettingViewWidgetState extends State<SettingViewWidget> {
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text(
-                                'ถอนเงิน',
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: 'Readex Pro',
-                                      fontSize: 32.0,
-                                    ),
+                              AuthUserStreamWidget(
+                                builder: (context) => Text(
+                                  'ยอดเงินคงเหลือ ${formatNumber(
+                                    valueOrDefault(
+                                        currentUserDocument?.credit, 0.0),
+                                    formatType: FormatType.decimal,
+                                    decimalType: DecimalType.automatic,
+                                  )}',
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Readex Pro',
+                                        fontSize: 32.0,
+                                      ),
+                                ),
                               ),
                             ],
                           ),
@@ -238,7 +245,28 @@ class _SettingViewWidgetState extends State<SettingViewWidget> {
                                                     credit:
                                                         _model.withdrawCredit,
                                                     type: 'ถอน',
+                                                    status: 0,
                                                   ));
+                                              await showDialog(
+                                                context: context,
+                                                builder: (alertDialogContext) {
+                                                  return AlertDialog(
+                                                    title: Text(
+                                                        'ระบบกำลังดำเนินการ...'),
+                                                    actions: [
+                                                      TextButton(
+                                                        onPressed: () =>
+                                                            Navigator.pop(
+                                                                alertDialogContext),
+                                                        child: Text('ตกลง'),
+                                                      ),
+                                                    ],
+                                                  );
+                                                },
+                                              );
+                                              setState(() {
+                                                _model.textController?.clear();
+                                              });
                                             } else {
                                               await showDialog(
                                                 context: context,
