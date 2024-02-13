@@ -134,6 +134,7 @@ class _SelectCreditViewWidgetState extends State<SelectCreditViewWidget> {
                             createBy: currentUserReference,
                             credit: 300.0,
                             type: 'ฝาก',
+                            status: 1,
                           ));
                       await actions.pushReplacementNamed(
                         context,
@@ -207,6 +208,7 @@ class _SelectCreditViewWidgetState extends State<SelectCreditViewWidget> {
                             createBy: currentUserReference,
                             credit: 500.0,
                             type: 'ฝาก',
+                            status: 1,
                           ));
                       await actions.pushReplacementNamed(
                         context,
@@ -280,6 +282,7 @@ class _SelectCreditViewWidgetState extends State<SelectCreditViewWidget> {
                             createBy: currentUserReference,
                             credit: 1000.0,
                             type: 'ฝาก',
+                            status: 1,
                           ));
                       await actions.pushReplacementNamed(
                         context,
