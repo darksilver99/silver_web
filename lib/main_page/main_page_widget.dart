@@ -1,8 +1,8 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/view/home_view/home_view_widget.dart';
-import '/view/login_view/login_view_widget.dart';
 import '/view/setting_view/setting_view_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -76,9 +76,12 @@ class _MainPageWidgetState extends State<MainPageWidget> {
                             ),
                             child: Align(
                               alignment: AlignmentDirectional(0.0, 0.0),
-                              child: Text(
-                                'Silver',
-                                style: FlutterFlowTheme.of(context).bodyMedium,
+                              child: AuthUserStreamWidget(
+                                builder: (context) => Text(
+                                  currentUserDisplayName,
+                                  style:
+                                      FlutterFlowTheme.of(context).bodyMedium,
+                                ),
                               ),
                             ),
                           ),
@@ -245,14 +248,11 @@ class _MainPageWidgetState extends State<MainPageWidget> {
                   hoverColor: Colors.transparent,
                   highlightColor: Colors.transparent,
                   onTap: () async {
-                    if (scaffoldKey.currentState!.isDrawerOpen ||
-                        scaffoldKey.currentState!.isEndDrawerOpen) {
-                      Navigator.pop(context);
-                    }
+                    GoRouter.of(context).prepareAuthEvent();
+                    await authManager.signOut();
+                    GoRouter.of(context).clearRedirectLocation();
 
-                    setState(() {
-                      _model.pageView = 'loginView';
-                    });
+                    context.goNamedAuth('AuthenPage', context.mounted);
                   },
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
@@ -274,14 +274,14 @@ class _MainPageWidgetState extends State<MainPageWidget> {
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 8.0, 0.0),
                                 child: Icon(
-                                  Icons.login_rounded,
+                                  Icons.logout_rounded,
                                   color: FlutterFlowTheme.of(context)
                                       .secondaryText,
                                   size: 18.0,
                                 ),
                               ),
                               Text(
-                                'เข้าสู่ระบบ/สมัครสมาชิก',
+                                'ออกจากระบบ',
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
@@ -329,12 +329,6 @@ class _MainPageWidgetState extends State<MainPageWidget> {
                           model: _model.settingViewModel,
                           updateCallback: () => setState(() {}),
                           child: SettingViewWidget(),
-                        ),
-                      if (_model.pageView == 'loginView')
-                        wrapWithModel(
-                          model: _model.loginViewModel,
-                          updateCallback: () => setState(() {}),
-                          child: LoginViewWidget(),
                         ),
                     ]
                         .addToStart(SizedBox(height: 16.0))
