@@ -61,6 +61,55 @@ class _MainPageWidgetState extends State<MainPageWidget> {
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
+                Stack(
+                  children: [
+                    Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Expanded(
+                          child: Container(
+                            width: 100.0,
+                            height: 100.0,
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.of(context).secondary,
+                            ),
+                            child: Align(
+                              alignment: AlignmentDirectional(0.0, 0.0),
+                              child: Text(
+                                'Silver',
+                                style: FlutterFlowTheme.of(context).bodyMedium,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Align(
+                      alignment: AlignmentDirectional(1.0, -1.0),
+                      child: Padding(
+                        padding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 8.0, 0.0),
+                        child: InkWell(
+                          splashColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () async {
+                            if (scaffoldKey.currentState!.isDrawerOpen ||
+                                scaffoldKey.currentState!.isEndDrawerOpen) {
+                              Navigator.pop(context);
+                            }
+                          },
+                          child: Icon(
+                            Icons.close_rounded,
+                            color: FlutterFlowTheme.of(context).secondaryText,
+                            size: 24.0,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
                 InkWell(
                   splashColor: Colors.transparent,
                   focusColor: Colors.transparent,
@@ -185,22 +234,51 @@ class _MainPageWidgetState extends State<MainPageWidget> {
         ),
         body: SafeArea(
           top: true,
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            crossAxisAlignment: CrossAxisAlignment.start,
+          child: Stack(
             children: [
-              if (_model.pageView == 'homeView')
-                wrapWithModel(
-                  model: _model.homeViewModel,
-                  updateCallback: () => setState(() {}),
-                  child: HomeViewWidget(),
+              Column(
+                mainAxisSize: MainAxisSize.max,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  if (_model.pageView == 'homeView')
+                    wrapWithModel(
+                      model: _model.homeViewModel,
+                      updateCallback: () => setState(() {}),
+                      child: HomeViewWidget(),
+                    ),
+                  if (_model.pageView == 'settingView')
+                    wrapWithModel(
+                      model: _model.settingViewModel,
+                      updateCallback: () => setState(() {}),
+                      child: SettingViewWidget(),
+                    ),
+                ],
+              ),
+              InkWell(
+                splashColor: Colors.transparent,
+                focusColor: Colors.transparent,
+                hoverColor: Colors.transparent,
+                highlightColor: Colors.transparent,
+                onTap: () async {
+                  scaffoldKey.currentState!.openDrawer();
+                },
+                child: Material(
+                  color: Colors.transparent,
+                  elevation: 3.0,
+                  child: Container(
+                    width: 32.0,
+                    height: 32.0,
+                    decoration: BoxDecoration(
+                      color: FlutterFlowTheme.of(context).secondaryBackground,
+                    ),
+                    child: Icon(
+                      Icons.menu_rounded,
+                      color: FlutterFlowTheme.of(context).secondaryText,
+                      size: 24.0,
+                    ),
+                  ),
                 ),
-              if (_model.pageView == 'settingView')
-                wrapWithModel(
-                  model: _model.settingViewModel,
-                  updateCallback: () => setState(() {}),
-                  child: SettingViewWidget(),
-                ),
+              ),
             ],
           ),
         ),
