@@ -630,7 +630,7 @@ class _AuthenPageWidgetState extends State<AuthenPageWidget> {
                                           focusNode: _model.textFieldFocusNode6,
                                           obscureText: false,
                                           decoration: InputDecoration(
-                                            labelText: 'ชื่อนามสกุล',
+                                            labelText: 'ชื่อ-นามสกุล',
                                             labelStyle:
                                                 FlutterFlowTheme.of(context)
                                                     .labelMedium,
@@ -729,7 +729,9 @@ class _AuthenPageWidgetState extends State<AuthenPageWidget> {
                                             await UsersRecord.collection
                                                 .doc(user.uid)
                                                 .update(createUsersRecordData(
-                                                  email: '',
+                                                  email: _model
+                                                      .emailTextController2
+                                                      .text,
                                                   displayName: _model
                                                       .textController2.text,
                                                   createdTime:
