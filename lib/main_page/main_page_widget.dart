@@ -117,6 +117,11 @@ class _MainPageWidgetState extends State<MainPageWidget> {
                   hoverColor: Colors.transparent,
                   highlightColor: Colors.transparent,
                   onTap: () async {
+                    if (scaffoldKey.currentState!.isDrawerOpen ||
+                        scaffoldKey.currentState!.isEndDrawerOpen) {
+                      Navigator.pop(context);
+                    }
+
                     setState(() {
                       _model.pageView = 'homeView';
                     });
@@ -176,6 +181,11 @@ class _MainPageWidgetState extends State<MainPageWidget> {
                   hoverColor: Colors.transparent,
                   highlightColor: Colors.transparent,
                   onTap: () async {
+                    if (scaffoldKey.currentState!.isDrawerOpen ||
+                        scaffoldKey.currentState!.isEndDrawerOpen) {
+                      Navigator.pop(context);
+                    }
+
                     setState(() {
                       _model.pageView = 'settingView';
                     });
@@ -235,6 +245,11 @@ class _MainPageWidgetState extends State<MainPageWidget> {
                   hoverColor: Colors.transparent,
                   highlightColor: Colors.transparent,
                   onTap: () async {
+                    if (scaffoldKey.currentState!.isDrawerOpen ||
+                        scaffoldKey.currentState!.isEndDrawerOpen) {
+                      Navigator.pop(context);
+                    }
+
                     setState(() {
                       _model.pageView = 'loginView';
                     });
