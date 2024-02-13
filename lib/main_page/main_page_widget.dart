@@ -3,6 +3,7 @@ import '/components/setting_view_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/view/login_view/login_view_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -228,6 +229,65 @@ class _MainPageWidgetState extends State<MainPageWidget> {
                     ],
                   ),
                 ),
+                InkWell(
+                  splashColor: Colors.transparent,
+                  focusColor: Colors.transparent,
+                  hoverColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  onTap: () async {
+                    setState(() {
+                      _model.pageView = 'loginView';
+                    });
+                  },
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Container(
+                        width: double.infinity,
+                        height: 60.0,
+                        decoration: BoxDecoration(
+                          color:
+                              FlutterFlowTheme.of(context).secondaryBackground,
+                        ),
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              16.0, 0.0, 16.0, 0.0),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 0.0, 8.0, 0.0),
+                                child: Icon(
+                                  Icons.settings_outlined,
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryText,
+                                  size: 24.0,
+                                ),
+                              ),
+                              Text(
+                                'LoginPage',
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                      fontFamily: 'Readex Pro',
+                                      fontSize: 18.0,
+                                    ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Container(
+                        width: double.infinity,
+                        height: 1.0,
+                        decoration: BoxDecoration(
+                          color: FlutterFlowTheme.of(context).alternate,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ],
             ),
           ),
@@ -236,23 +296,32 @@ class _MainPageWidgetState extends State<MainPageWidget> {
           top: true,
           child: Stack(
             children: [
-              Column(
-                mainAxisSize: MainAxisSize.max,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  if (_model.pageView == 'homeView')
-                    wrapWithModel(
-                      model: _model.homeViewModel,
-                      updateCallback: () => setState(() {}),
-                      child: HomeViewWidget(),
-                    ),
-                  if (_model.pageView == 'settingView')
-                    wrapWithModel(
-                      model: _model.settingViewModel,
-                      updateCallback: () => setState(() {}),
-                      child: SettingViewWidget(),
-                    ),
-                ],
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(16.0, 32.0, 16.0, 32.0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    if (_model.pageView == 'homeView')
+                      wrapWithModel(
+                        model: _model.homeViewModel,
+                        updateCallback: () => setState(() {}),
+                        child: HomeViewWidget(),
+                      ),
+                    if (_model.pageView == 'settingView')
+                      wrapWithModel(
+                        model: _model.settingViewModel,
+                        updateCallback: () => setState(() {}),
+                        child: SettingViewWidget(),
+                      ),
+                    if (_model.pageView == 'loginView')
+                      wrapWithModel(
+                        model: _model.loginViewModel,
+                        updateCallback: () => setState(() {}),
+                        child: LoginViewWidget(),
+                      ),
+                  ],
+                ),
               ),
               InkWell(
                 splashColor: Colors.transparent,
