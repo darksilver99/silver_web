@@ -7,6 +7,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class NavMenuViewModel extends FlutterFlowModel<NavMenuViewWidget> {
+  ///  Local state fields for this component.
+
+  bool isShowNav = true;
+
   /// Initialization and disposal methods.
 
   void initState(BuildContext context) {}
