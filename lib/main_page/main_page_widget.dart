@@ -336,7 +336,9 @@ class _MainPageWidgetState extends State<MainPageWidget> {
                           updateCallback: () => setState(() {}),
                           child: LoginViewWidget(),
                         ),
-                    ],
+                    ]
+                        .addToStart(SizedBox(height: 16.0))
+                        .addToEnd(SizedBox(height: 64.0)),
                   ),
                 ),
               ),

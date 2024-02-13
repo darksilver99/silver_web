@@ -41,18 +41,62 @@ class _SettingViewWidgetState extends State<SettingViewWidget> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
+      primary: false,
       child: Column(
         mainAxisSize: MainAxisSize.max,
         children: [
           Container(
             width: double.infinity,
-            height: 100.0,
             decoration: BoxDecoration(
               color: FlutterFlowTheme.of(context).secondaryBackground,
             ),
-            child: Text(
-              'setting page ja',
-              style: FlutterFlowTheme.of(context).bodyMedium,
+            child: Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 16.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Container(
+                    width: () {
+                      if (MediaQuery.sizeOf(context).width < kBreakpointSmall) {
+                        return MediaQuery.sizeOf(context).width;
+                      } else if (MediaQuery.sizeOf(context).width <
+                          kBreakpointMedium) {
+                        return MediaQuery.sizeOf(context).width;
+                      } else if (MediaQuery.sizeOf(context).width <
+                          kBreakpointLarge) {
+                        return 300.0;
+                      } else {
+                        return 300.0;
+                      }
+                    }(),
+                    decoration: BoxDecoration(),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 0.0, 0.0, 16.0),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                'ตั้งค่า',
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                      fontFamily: 'Readex Pro',
+                                      fontSize: 32.0,
+                                    ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ],
