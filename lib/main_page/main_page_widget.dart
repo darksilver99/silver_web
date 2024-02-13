@@ -329,14 +329,14 @@ class _MainPageWidgetState extends State<MainPageWidget> {
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 8.0, 0.0),
                                 child: Icon(
-                                  Icons.settings_outlined,
+                                  Icons.currency_exchange_rounded,
                                   color: FlutterFlowTheme.of(context)
                                       .secondaryText,
                                   size: 18.0,
                                 ),
                               ),
                               Text(
-                                'ตั้งค่า',
+                                'ถอนเงิน',
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
