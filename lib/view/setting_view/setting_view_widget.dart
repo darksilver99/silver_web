@@ -240,6 +240,23 @@ class _SettingViewWidgetState extends State<SettingViewWidget> {
                                                     type: 'ถอน',
                                                   ));
                                               Navigator.pop(context);
+                                            } else {
+                                              await showDialog(
+                                                context: context,
+                                                builder: (alertDialogContext) {
+                                                  return AlertDialog(
+                                                    title: Text('ยอดเงินไม่พอ'),
+                                                    actions: [
+                                                      TextButton(
+                                                        onPressed: () =>
+                                                            Navigator.pop(
+                                                                alertDialogContext),
+                                                        child: Text('ตกลง'),
+                                                      ),
+                                                    ],
+                                                  );
+                                                },
+                                              );
                                             }
                                           }
                                         },
