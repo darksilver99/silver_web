@@ -48,7 +48,7 @@ class _NavMenuViewWidgetState extends State<NavMenuViewWidget> {
             color: Colors.transparent,
             elevation: 3.0,
             child: Container(
-              width: 300.0,
+              width: 280.0,
               height: MediaQuery.sizeOf(context).height * 1.0,
               decoration: BoxDecoration(
                 color: FlutterFlowTheme.of(context).secondaryBackground,
@@ -227,10 +227,10 @@ class _NavMenuViewWidgetState extends State<NavMenuViewWidget> {
               });
             },
             child: Container(
-              width: 32.0,
-              height: 32.0,
+              width: 36.0,
+              height: 36.0,
               decoration: BoxDecoration(
-                color: FlutterFlowTheme.of(context).secondaryBackground,
+                color: FlutterFlowTheme.of(context).alternate,
               ),
               child: Icon(
                 Icons.menu_rounded,
