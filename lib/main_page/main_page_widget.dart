@@ -71,7 +71,6 @@ class _MainPageWidgetState extends State<MainPageWidget> {
                         Expanded(
                           child: Container(
                             width: 100.0,
-                            height: 100.0,
                             decoration: BoxDecoration(
                               color: FlutterFlowTheme.of(context).secondary,
                             ),
