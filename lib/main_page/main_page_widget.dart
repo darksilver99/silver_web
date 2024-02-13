@@ -1,9 +1,9 @@
-import '/components/home_view_widget.dart';
-import '/components/setting_view_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/view/home_view/home_view_widget.dart';
 import '/view/login_view/login_view_widget.dart';
+import '/view/setting_view/setting_view_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -313,29 +313,31 @@ class _MainPageWidgetState extends State<MainPageWidget> {
             children: [
               Padding(
                 padding: EdgeInsets.all(16.0),
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    if (_model.pageView == 'homeView')
-                      wrapWithModel(
-                        model: _model.homeViewModel,
-                        updateCallback: () => setState(() {}),
-                        child: HomeViewWidget(),
-                      ),
-                    if (_model.pageView == 'settingView')
-                      wrapWithModel(
-                        model: _model.settingViewModel,
-                        updateCallback: () => setState(() {}),
-                        child: SettingViewWidget(),
-                      ),
-                    if (_model.pageView == 'loginView')
-                      wrapWithModel(
-                        model: _model.loginViewModel,
-                        updateCallback: () => setState(() {}),
-                        child: LoginViewWidget(),
-                      ),
-                  ],
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      if (_model.pageView == 'homeView')
+                        wrapWithModel(
+                          model: _model.homeViewModel,
+                          updateCallback: () => setState(() {}),
+                          child: HomeViewWidget(),
+                        ),
+                      if (_model.pageView == 'settingView')
+                        wrapWithModel(
+                          model: _model.settingViewModel,
+                          updateCallback: () => setState(() {}),
+                          child: SettingViewWidget(),
+                        ),
+                      if (_model.pageView == 'loginView')
+                        wrapWithModel(
+                          model: _model.loginViewModel,
+                          updateCallback: () => setState(() {}),
+                          child: LoginViewWidget(),
+                        ),
+                    ],
+                  ),
                 ),
               ),
               InkWell(

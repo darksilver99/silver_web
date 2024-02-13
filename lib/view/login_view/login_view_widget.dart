@@ -60,6 +60,7 @@ class _LoginViewWidgetState extends State<LoginViewWidget> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
+      primary: false,
       child: Column(
         mainAxisSize: MainAxisSize.max,
         children: [
