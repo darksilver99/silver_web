@@ -146,14 +146,14 @@ class _MainPageWidgetState extends State<MainPageWidget> {
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 8.0, 0.0),
                                 child: Icon(
-                                  Icons.settings_outlined,
+                                  Icons.house_rounded,
                                   color: FlutterFlowTheme.of(context)
                                       .secondaryText,
-                                  size: 24.0,
+                                  size: 18.0,
                                 ),
                               ),
                               Text(
-                                'HomePage',
+                                'หน้าหลัก',
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
@@ -213,11 +213,11 @@ class _MainPageWidgetState extends State<MainPageWidget> {
                                   Icons.settings_outlined,
                                   color: FlutterFlowTheme.of(context)
                                       .secondaryText,
-                                  size: 24.0,
+                                  size: 18.0,
                                 ),
                               ),
                               Text(
-                                'SettingPage',
+                                'ตั้งค่า',
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
@@ -274,14 +274,14 @@ class _MainPageWidgetState extends State<MainPageWidget> {
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 8.0, 0.0),
                                 child: Icon(
-                                  Icons.settings_outlined,
+                                  Icons.login_rounded,
                                   color: FlutterFlowTheme.of(context)
                                       .secondaryText,
-                                  size: 24.0,
+                                  size: 18.0,
                                 ),
                               ),
                               Text(
-                                'LoginPage',
+                                'เข้าสู่ระบบ/สมัครสมาชิก',
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
@@ -312,7 +312,7 @@ class _MainPageWidgetState extends State<MainPageWidget> {
           child: Stack(
             children: [
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(16.0, 32.0, 16.0, 32.0),
+                padding: EdgeInsets.all(16.0),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   crossAxisAlignment: CrossAxisAlignment.start,
