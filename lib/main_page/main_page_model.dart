@@ -1,9 +1,9 @@
-import '/components/home_view_widget.dart';
-import '/components/setting_view_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/view/home_view/home_view_widget.dart';
 import '/view/login_view/login_view_widget.dart';
+import '/view/setting_view/setting_view_widget.dart';
 import 'main_page_widget.dart' show MainPageWidget;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
