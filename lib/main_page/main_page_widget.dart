@@ -222,6 +222,8 @@ class _MainPageWidgetState extends State<MainPageWidget> {
                                                 ).then(
                                                     (value) => setState(() {}));
 
+                                                FFAppState().tranferReferent =
+                                                    null;
                                                 await actions
                                                     .pushReplacementNamed(
                                                   context,

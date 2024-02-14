@@ -1,7 +1,10 @@
+import '/auth/firebase_auth/auth_util.dart';
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_web_view.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
@@ -42,6 +45,12 @@ class _PaymentViewWidgetState extends State<PaymentViewWidget> {
     // On component load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       setState(() {});
+
+      await FFAppState()
+          .tranferReferent!
+          .update(createTranferHistoryListRecordData(
+            paymentId: _model.paymentID,
+          ));
     });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
@@ -197,30 +206,53 @@ class _PaymentViewWidgetState extends State<PaymentViewWidget> {
                     verticalScroll: false,
                     horizontalScroll: false,
                   ),
-                FFButtonWidget(
-                  onPressed: () {
-                    print('Button pressed ...');
-                    exampleCreateSource();
-                  },
-                  text: _model.paymentSuccess ? 'success' : 'Processing...',
-                  options: FFButtonOptions(
-                    height: 40.0,
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
-                    iconPadding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                    color: FlutterFlowTheme.of(context).primary,
-                    textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                          fontFamily: 'Readex Pro',
-                          color: Colors.white,
+                StreamBuilder<TranferHistoryListRecord>(
+                  stream: TranferHistoryListRecord.getDocument(
+                      FFAppState().tranferReferent!),
+                  builder: (context, snapshot) {
+                    // Customize what your widget looks like when it's loading.
+                    if (!snapshot.hasData) {
+                      return Center(
+                        child: SizedBox(
+                          width: 50.0,
+                          height: 50.0,
+                          child: CircularProgressIndicator(
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                              FlutterFlowTheme.of(context).primary,
+                            ),
+                          ),
                         ),
-                    elevation: 3.0,
-                    borderSide: BorderSide(
-                      color: Colors.transparent,
-                      width: 1.0,
-                    ),
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
+                      );
+                    }
+                    final buttonTranferHistoryListRecord = snapshot.data!;
+                    return FFButtonWidget(
+                      onPressed: () {
+                        print('Button pressed ...');
+                      },
+                      text: buttonTranferHistoryListRecord.status == 1
+                          ? 'Success'
+                          : 'Processing...',
+                      options: FFButtonOptions(
+                        height: 40.0,
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            24.0, 0.0, 24.0, 0.0),
+                        iconPadding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                        color: FlutterFlowTheme.of(context).primary,
+                        textStyle:
+                            FlutterFlowTheme.of(context).titleSmall.override(
+                                  fontFamily: 'Readex Pro',
+                                  color: Colors.white,
+                                ),
+                        elevation: 3.0,
+                        borderSide: BorderSide(
+                          color: Colors.transparent,
+                          width: 1.0,
+                        ),
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                    );
+                  },
                 ),
               ]
                   .divide(SizedBox(height: 8.0))
