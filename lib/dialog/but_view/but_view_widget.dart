@@ -301,6 +301,7 @@ class _ButViewWidgetState extends State<ButViewWidget> {
                                     );
                                   },
                                 );
+                                FFAppState().currentPage = 'orderView';
                                 await actions.pushReplacementNamed(
                                   context,
                                 );
