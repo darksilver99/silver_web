@@ -15,3 +15,10 @@ import '/auth/firebase_auth/auth_util.dart';
 double? stringToDouble(String? str) {
   return double.parse(str!);
 }
+
+bool? containsOnlyDigits(String? str) {
+  if (str == null) {
+    return false;
+  }
+  return RegExp(r'^[0-9]+$').hasMatch(str);
+}

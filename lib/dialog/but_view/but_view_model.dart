@@ -31,6 +31,13 @@ class ButViewModel extends FlutterFlowModel<ButViewWidget> {
       return 'Field is required';
     }
 
+    if (val.length < 3) {
+      return 'Requires at least 3 characters.';
+    }
+    if (val.length > 3) {
+      return 'Maximum 3 characters allowed, currently ${val.length}.';
+    }
+
     return null;
   }
 
