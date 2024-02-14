@@ -170,7 +170,6 @@ class _HistoryTranferViewWidgetState extends State<HistoryTranferViewWidget> {
                             elevation: 3.0,
                             child: Container(
                               width: double.infinity,
-                              height: 100.0,
                               decoration: BoxDecoration(
                                 color: FlutterFlowTheme.of(context)
                                     .secondaryBackground,
@@ -182,36 +181,56 @@ class _HistoryTranferViewWidgetState extends State<HistoryTranferViewWidget> {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                     Expanded(
-                                      child: Text(
-                                        '${listViewTranferHistoryListRecord.type} ${formatNumber(
-                                          listViewTranferHistoryListRecord
-                                              .credit,
-                                          formatType: FormatType.decimal,
-                                          decimalType: DecimalType.automatic,
-                                        )} บาท',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .override(
-                                              fontFamily: 'Readex Pro',
-                                              color: () {
-                                                if (listViewTranferHistoryListRecord
-                                                        .status ==
-                                                    0) {
-                                                  return FlutterFlowTheme.of(
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            '${listViewTranferHistoryListRecord.type} ${formatNumber(
+                                              listViewTranferHistoryListRecord
+                                                  .credit,
+                                              formatType: FormatType.decimal,
+                                              decimalType:
+                                                  DecimalType.automatic,
+                                            )} บาท',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily: 'Readex Pro',
+                                                  color: () {
+                                                    if (listViewTranferHistoryListRecord
+                                                            .status ==
+                                                        0) {
+                                                      return FlutterFlowTheme
+                                                              .of(context)
+                                                          .tertiary;
+                                                    } else if (listViewTranferHistoryListRecord
+                                                            .status ==
+                                                        1) {
+                                                      return FlutterFlowTheme
+                                                              .of(context)
+                                                          .success;
+                                                    } else {
+                                                      return Color(0x00000000);
+                                                    }
+                                                  }(),
+                                                  fontSize: 22.0,
+                                                ),
+                                          ),
+                                          Text(
+                                            '${dateTimeFormat('d/M/y', listViewTranferHistoryListRecord.createDate)} ${dateTimeFormat('Hm', listViewTranferHistoryListRecord.createDate)}',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily: 'Readex Pro',
+                                                  color: FlutterFlowTheme.of(
                                                           context)
-                                                      .tertiary;
-                                                } else if (listViewTranferHistoryListRecord
-                                                        .status ==
-                                                    1) {
-                                                  return FlutterFlowTheme.of(
-                                                          context)
-                                                      .success;
-                                                } else {
-                                                  return Color(0x00000000);
-                                                }
-                                              }(),
-                                              fontSize: 22.0,
-                                            ),
+                                                      .secondaryText,
+                                                  fontSize: 12.0,
+                                                ),
+                                          ),
+                                        ],
                                       ),
                                     ),
                                     Expanded(
