@@ -28,4 +28,10 @@ class FFAppState extends ChangeNotifier {
   set currentPage(String _value) {
     _currentPage = _value;
   }
+
+  DocumentReference? _tranferReferent;
+  DocumentReference? get tranferReferent => _tranferReferent;
+  set tranferReferent(DocumentReference? _value) {
+    _tranferReferent = _value;
+  }
 }

@@ -46,6 +46,11 @@ class TranferHistoryListRecord extends FirestoreRecord {
   DocumentReference? get orderRef => _orderRef;
   bool hasOrderRef() => _orderRef != null;
 
+  // "payment_id" field.
+  String? _paymentId;
+  String get paymentId => _paymentId ?? '';
+  bool hasPaymentId() => _paymentId != null;
+
   void _initializeFields() {
     _createDate = snapshotData['create_date'] as DateTime?;
     _createBy = snapshotData['create_by'] as DocumentReference?;
@@ -53,6 +58,7 @@ class TranferHistoryListRecord extends FirestoreRecord {
     _type = snapshotData['type'] as String?;
     _status = castToType<int>(snapshotData['status']);
     _orderRef = snapshotData['order_ref'] as DocumentReference?;
+    _paymentId = snapshotData['payment_id'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -97,6 +103,7 @@ Map<String, dynamic> createTranferHistoryListRecordData({
   String? type,
   int? status,
   DocumentReference? orderRef,
+  String? paymentId,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -106,6 +113,7 @@ Map<String, dynamic> createTranferHistoryListRecordData({
       'type': type,
       'status': status,
       'order_ref': orderRef,
+      'payment_id': paymentId,
     }.withoutNulls,
   );
 
@@ -123,12 +131,20 @@ class TranferHistoryListRecordDocumentEquality
         e1?.credit == e2?.credit &&
         e1?.type == e2?.type &&
         e1?.status == e2?.status &&
-        e1?.orderRef == e2?.orderRef;
+        e1?.orderRef == e2?.orderRef &&
+        e1?.paymentId == e2?.paymentId;
   }
 
   @override
-  int hash(TranferHistoryListRecord? e) => const ListEquality().hash(
-      [e?.createDate, e?.createBy, e?.credit, e?.type, e?.status, e?.orderRef]);
+  int hash(TranferHistoryListRecord? e) => const ListEquality().hash([
+        e?.createDate,
+        e?.createBy,
+        e?.credit,
+        e?.type,
+        e?.status,
+        e?.orderRef,
+        e?.paymentId
+      ]);
 
   @override
   bool isValidKey(Object? o) => o is TranferHistoryListRecord;
