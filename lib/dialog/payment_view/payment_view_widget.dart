@@ -126,7 +126,9 @@ class _PaymentViewWidgetState extends State<PaymentViewWidget> {
       print(jsonData["source"]["scannable_code"]["image"]["download_uri"]);
 
       setState(() {
-        _model.qrPath = jsonData["source"]["scannable_code"]["image"]["download_uri"];
+        _model.qrPath = "https://silver-api.com/qr.php?path=${jsonData["source"]["scannable_code"]["image"]["download_uri"].toString().replaceAll("https://", "")}";
+        print("_model.qrPath");
+        print(_model.qrPath);
       });
 
     } else {
