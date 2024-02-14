@@ -109,6 +109,7 @@ class _ButViewWidgetState extends State<ButViewWidget> {
                         child: TextFormField(
                           controller: _model.textController,
                           focusNode: _model.textFieldFocusNode,
+                          textCapitalization: TextCapitalization.none,
                           obscureText: false,
                           decoration: InputDecoration(
                             labelText: 'ระบุเลขท้าย 3 ตัว',
@@ -145,8 +146,6 @@ class _ButViewWidgetState extends State<ButViewWidget> {
                             ),
                           ),
                           style: FlutterFlowTheme.of(context).bodyMedium,
-                          maxLength: 3,
-                          maxLengthEnforcement: MaxLengthEnforcement.enforced,
                           keyboardType: TextInputType.number,
                           validator: _model.textControllerValidator
                               .asValidator(context),
@@ -165,7 +164,7 @@ class _ButViewWidgetState extends State<ButViewWidget> {
                           options: ['100', '300', '500', '1000', '2000'],
                           onChanged: (val) =>
                               setState(() => _model.dropDownValue = val),
-                          width: 300.0,
+                          width: double.infinity,
                           height: 50.0,
                           textStyle: FlutterFlowTheme.of(context).bodyMedium,
                           hintText: 'เลือกราคา',
@@ -212,114 +211,133 @@ class _ButViewWidgetState extends State<ButViewWidget> {
                             );
                             return;
                           }
-                          var confirmDialogResponse = await showDialog<bool>(
-                                context: context,
-                                builder: (alertDialogContext) {
-                                  return AlertDialog(
-                                    title: Text(
-                                        'ยืนยันซื้อเลข ${_model.textController.text} ?'),
-                                    actions: [
-                                      TextButton(
-                                        onPressed: () => Navigator.pop(
-                                            alertDialogContext, false),
-                                        child: Text('ยกเลิก'),
-                                      ),
-                                      TextButton(
-                                        onPressed: () => Navigator.pop(
-                                            alertDialogContext, true),
-                                        child: Text('ยืนยัน'),
-                                      ),
-                                    ],
-                                  );
-                                },
-                              ) ??
-                              false;
-                          if (confirmDialogResponse) {
-                            if (valueOrDefault(
-                                    currentUserDocument?.credit, 0.0) >=
-                                functions
-                                    .stringToDouble(_model.dropDownValue)!) {
-                              await currentUserReference!.update({
-                                ...mapToFirestore(
-                                  {
-                                    'credit': FieldValue.increment(
-                                        -(functions.stringToDouble(
-                                            _model.dropDownValue)!)),
+                          if (functions.containsOnlyDigits(
+                              _model.textController.text)!) {
+                            var confirmDialogResponse = await showDialog<bool>(
+                                  context: context,
+                                  builder: (alertDialogContext) {
+                                    return AlertDialog(
+                                      title: Text(
+                                          'ยืนยันซื้อเลข ${_model.textController.text} ?'),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () => Navigator.pop(
+                                              alertDialogContext, false),
+                                          child: Text('ยกเลิก'),
+                                        ),
+                                        TextButton(
+                                          onPressed: () => Navigator.pop(
+                                              alertDialogContext, true),
+                                          child: Text('ยืนยัน'),
+                                        ),
+                                      ],
+                                    );
                                   },
-                                ),
-                              });
+                                ) ??
+                                false;
+                            if (confirmDialogResponse) {
+                              if (valueOrDefault(
+                                      currentUserDocument?.credit, 0.0) >=
+                                  functions
+                                      .stringToDouble(_model.dropDownValue)!) {
+                                await currentUserReference!.update({
+                                  ...mapToFirestore(
+                                    {
+                                      'credit': FieldValue.increment(
+                                          -(functions.stringToDouble(
+                                              _model.dropDownValue)!)),
+                                    },
+                                  ),
+                                });
 
-                              var orderListRecordReference =
-                                  OrderListRecord.collection.doc();
-                              await orderListRecordReference
-                                  .set(createOrderListRecordData(
-                                createDate: getCurrentTimestamp,
-                                createBy: currentUserReference,
-                                status: 1,
-                                product: _model.textController.text,
-                                productStatus: 'รอประกาศผล',
-                                price: functions
-                                    .stringToDouble(_model.dropDownValue),
-                              ));
-                              _model.orderRef =
-                                  OrderListRecord.getDocumentFromData(
-                                      createOrderListRecordData(
-                                        createDate: getCurrentTimestamp,
-                                        createBy: currentUserReference,
-                                        status: 1,
-                                        product: _model.textController.text,
-                                        productStatus: 'รอประกาศผล',
-                                        price: functions.stringToDouble(
-                                            _model.dropDownValue),
-                                      ),
-                                      orderListRecordReference);
+                                var orderListRecordReference =
+                                    OrderListRecord.collection.doc();
+                                await orderListRecordReference
+                                    .set(createOrderListRecordData(
+                                  createDate: getCurrentTimestamp,
+                                  createBy: currentUserReference,
+                                  status: 1,
+                                  product: _model.textController.text,
+                                  productStatus: 'รอประกาศผล',
+                                  price: functions
+                                      .stringToDouble(_model.dropDownValue),
+                                ));
+                                _model.orderRef =
+                                    OrderListRecord.getDocumentFromData(
+                                        createOrderListRecordData(
+                                          createDate: getCurrentTimestamp,
+                                          createBy: currentUserReference,
+                                          status: 1,
+                                          product: _model.textController.text,
+                                          productStatus: 'รอประกาศผล',
+                                          price: functions.stringToDouble(
+                                              _model.dropDownValue),
+                                        ),
+                                        orderListRecordReference);
 
-                              await TranferHistoryListRecord.collection
-                                  .doc()
-                                  .set(createTranferHistoryListRecordData(
-                                    createDate: getCurrentTimestamp,
-                                    createBy: currentUserReference,
-                                    credit: functions
-                                        .stringToDouble(_model.dropDownValue),
-                                    type: 'ซื้อเลข',
-                                    status: 1,
-                                    orderRef: _model.orderRef?.reference,
-                                  ));
-                              await showDialog(
-                                context: context,
-                                builder: (alertDialogContext) {
-                                  return AlertDialog(
-                                    title: Text('เรียบร้อยแล้วรอประกาศผล'),
-                                    actions: [
-                                      TextButton(
-                                        onPressed: () =>
-                                            Navigator.pop(alertDialogContext),
-                                        child: Text('ยกลง'),
-                                      ),
-                                    ],
-                                  );
-                                },
-                              );
-                              await actions.pushReplacementNamed(
-                                context,
-                              );
-                            } else {
-                              await showDialog(
-                                context: context,
-                                builder: (alertDialogContext) {
-                                  return AlertDialog(
-                                    title: Text('ยอดเงินไม่พอ!'),
-                                    actions: [
-                                      TextButton(
-                                        onPressed: () =>
-                                            Navigator.pop(alertDialogContext),
-                                        child: Text('ตกลง'),
-                                      ),
-                                    ],
-                                  );
-                                },
-                              );
+                                await TranferHistoryListRecord.collection
+                                    .doc()
+                                    .set(createTranferHistoryListRecordData(
+                                      createDate: getCurrentTimestamp,
+                                      createBy: currentUserReference,
+                                      credit: functions
+                                          .stringToDouble(_model.dropDownValue),
+                                      type: 'ซื้อเลข',
+                                      status: 1,
+                                      orderRef: _model.orderRef?.reference,
+                                    ));
+                                await showDialog(
+                                  context: context,
+                                  builder: (alertDialogContext) {
+                                    return AlertDialog(
+                                      title: Text('เรียบร้อยแล้วรอประกาศผล'),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () =>
+                                              Navigator.pop(alertDialogContext),
+                                          child: Text('ยกลง'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                                await actions.pushReplacementNamed(
+                                  context,
+                                );
+                              } else {
+                                await showDialog(
+                                  context: context,
+                                  builder: (alertDialogContext) {
+                                    return AlertDialog(
+                                      title: Text('ยอดเงินไม่พอ!'),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () =>
+                                              Navigator.pop(alertDialogContext),
+                                          child: Text('ตกลง'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              }
                             }
+                          } else {
+                            await showDialog(
+                              context: context,
+                              builder: (alertDialogContext) {
+                                return AlertDialog(
+                                  title: Text('กรอกเฉพาะตัวเลข'),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () =>
+                                          Navigator.pop(alertDialogContext),
+                                      child: Text('ตกลง'),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
                           }
 
                           setState(() {});
