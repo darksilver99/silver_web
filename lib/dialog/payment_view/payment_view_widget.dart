@@ -120,11 +120,18 @@ class _PaymentViewWidgetState extends State<PaymentViewWidget> {
     var response = await http.post(Uri.parse(url), body: jsonEncode(requestBody), headers: header);
 
     if (response.statusCode == 200) {
-      print('Upload successful!');
+      print('successful!');
       //print('Photo URL: ${response.body}');
-      log(response.body);
+
+      Map<String, dynamic> jsonData = jsonDecode(response.body);
+      print(jsonData["source"]["scannable_code"]["image"]["download_uri"]);
+
+      setState(() {
+        _model.qrPath = jsonData["source"]["scannable_code"]["image"]["download_uri"];
+      });
+
     } else {
-      print('Upload failed with status code: ${response.statusCode}');
+      print('failed with status code: ${response.statusCode}');
       print('${response.body}');
     }
   }
