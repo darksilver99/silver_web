@@ -4,6 +4,7 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'payment_view_model.dart';
@@ -99,14 +100,9 @@ class _PaymentViewWidgetState extends State<PaymentViewWidget> {
                   ),
                 ),
                 if (_model.qrPath != null && _model.qrPath != '')
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(0.0),
-                    child: Image.network(
-                      _model.qrPath!,
-                      width: 200.0,
-                      height: 200.0,
-                      fit: BoxFit.cover,
-                    ),
+                  Html(
+                    data: _model.qrPath!,
+                    onLinkTap: (url, _, __, ___) => launchURL(url!),
                   ),
                 FFButtonWidget(
                   onPressed: () {
