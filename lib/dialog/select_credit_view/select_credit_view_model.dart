@@ -11,6 +11,11 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class SelectCreditViewModel extends FlutterFlowModel<SelectCreditViewWidget> {
+  ///  State fields for stateful widgets in this component.
+
+  // Stores action output result for [Backend Call - Create Document] action in Container widget.
+  TranferHistoryListRecord? tranferRef;
+
   /// Initialization and disposal methods.
 
   void initState(BuildContext context) {}
