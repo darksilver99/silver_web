@@ -32,7 +32,9 @@ class _PaymentViewWidgetState extends State<PaymentViewWidget> {
 
     // On component load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      setState(() {});
+      setState(() {
+        _model.qrPath = 'https://picsum.photos/seed/995/600';
+      });
     });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
@@ -96,11 +98,21 @@ class _PaymentViewWidgetState extends State<PaymentViewWidget> {
                     ],
                   ),
                 ),
+                if (_model.qrPath != null && _model.qrPath != '')
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(0.0),
+                    child: Image.network(
+                      _model.qrPath!,
+                      width: 200.0,
+                      height: 200.0,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                 FFButtonWidget(
                   onPressed: () {
                     print('Button pressed ...');
                   },
-                  text: 'Processing...',
+                  text: _model.paymentSuccess ? 'success' : 'Processing...',
                   options: FFButtonOptions(
                     height: 40.0,
                     padding:
