@@ -7,19 +7,18 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:provider/provider.dart';
-import 'history_tranfer_view_model.dart';
-export 'history_tranfer_view_model.dart';
+import 'order_view_model.dart';
+export 'order_view_model.dart';
 
-class HistoryTranferViewWidget extends StatefulWidget {
-  const HistoryTranferViewWidget({super.key});
+class OrderViewWidget extends StatefulWidget {
+  const OrderViewWidget({super.key});
 
   @override
-  State<HistoryTranferViewWidget> createState() =>
-      _HistoryTranferViewWidgetState();
+  State<OrderViewWidget> createState() => _OrderViewWidgetState();
 }
 
-class _HistoryTranferViewWidgetState extends State<HistoryTranferViewWidget> {
-  late HistoryTranferViewModel _model;
+class _OrderViewWidgetState extends State<OrderViewWidget> {
+  late OrderViewModel _model;
 
   @override
   void setState(VoidCallback callback) {
@@ -30,7 +29,7 @@ class _HistoryTranferViewWidgetState extends State<HistoryTranferViewWidget> {
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => HistoryTranferViewModel());
+    _model = createModel(context, () => OrderViewModel());
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -70,7 +69,7 @@ class _HistoryTranferViewWidgetState extends State<HistoryTranferViewWidget> {
                       children: [
                         Expanded(
                           child: Text(
-                            'ประวัติการ ฝาก-ถอน เงิน',
+                            'เลขที่ซื้อ',
                             textAlign: TextAlign.center,
                             style: FlutterFlowTheme.of(context)
                                 .bodyMedium
@@ -87,16 +86,14 @@ class _HistoryTranferViewWidgetState extends State<HistoryTranferViewWidget> {
                     padding:
                         EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
                     child: PagedListView<DocumentSnapshot<Object?>?,
-                        TranferHistoryListRecord>(
+                        OrderListRecord>(
                       pagingController: _model.setListViewController(
-                        TranferHistoryListRecord.collection
+                        OrderListRecord.collection
                             .where(
-                          'create_by',
-                          isEqualTo: currentUserReference,
-                        )
-                            .whereIn('type', ['ฝาก', 'ถอน']).orderBy(
-                                'create_date',
-                                descending: true),
+                              'create_by',
+                              isEqualTo: currentUserReference,
+                            )
+                            .orderBy('create_date', descending: true),
                       ),
                       padding: EdgeInsets.zero,
                       primary: false,
@@ -104,7 +101,7 @@ class _HistoryTranferViewWidgetState extends State<HistoryTranferViewWidget> {
                       reverse: false,
                       scrollDirection: Axis.vertical,
                       builderDelegate:
-                          PagedChildBuilderDelegate<TranferHistoryListRecord>(
+                          PagedChildBuilderDelegate<OrderListRecord>(
                         // Customize what your widget looks like when it's loading the first page.
                         firstPageProgressIndicatorBuilder: (_) => Center(
                           child: SizedBox(
@@ -131,7 +128,7 @@ class _HistoryTranferViewWidgetState extends State<HistoryTranferViewWidget> {
                         ),
 
                         itemBuilder: (context, _, listViewIndex) {
-                          final listViewTranferHistoryListRecord = _model
+                          final listViewOrderListRecord = _model
                               .listViewPagingController!
                               .itemList![listViewIndex];
                           return Material(
@@ -156,39 +153,35 @@ class _HistoryTranferViewWidgetState extends State<HistoryTranferViewWidget> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            '${listViewTranferHistoryListRecord.type} ${formatNumber(
-                                              listViewTranferHistoryListRecord
-                                                  .credit,
-                                              formatType: FormatType.decimal,
-                                              decimalType:
-                                                  DecimalType.automatic,
-                                            )} บาท',
+                                            'เลข ${listViewOrderListRecord.product} ราคา ${listViewOrderListRecord.price.toString()} บาท',
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
                                                   fontFamily: 'Readex Pro',
                                                   color: () {
-                                                    if (listViewTranferHistoryListRecord
-                                                            .status ==
-                                                        0) {
+                                                    if (listViewOrderListRecord
+                                                            .productStatus ==
+                                                        'รอประกาศผล') {
                                                       return FlutterFlowTheme
                                                               .of(context)
                                                           .tertiary;
-                                                    } else if (listViewTranferHistoryListRecord
-                                                            .status ==
-                                                        1) {
+                                                    } else if (listViewOrderListRecord
+                                                            .productStatus ==
+                                                        'ถูกรางวัล') {
                                                       return FlutterFlowTheme
                                                               .of(context)
                                                           .success;
                                                     } else {
-                                                      return Color(0x00000000);
+                                                      return FlutterFlowTheme
+                                                              .of(context)
+                                                          .primaryText;
                                                     }
                                                   }(),
                                                   fontSize: 22.0,
                                                 ),
                                           ),
                                           Text(
-                                            '${dateTimeFormat('d/M/y', listViewTranferHistoryListRecord.createDate)} ${dateTimeFormat('Hm', listViewTranferHistoryListRecord.createDate)}',
+                                            '${dateTimeFormat('d/M/y', listViewOrderListRecord.createDate)} ${dateTimeFormat('Hm', listViewOrderListRecord.createDate)}',
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
@@ -207,38 +200,28 @@ class _HistoryTranferViewWidgetState extends State<HistoryTranferViewWidget> {
                                         alignment:
                                             AlignmentDirectional(1.0, 0.0),
                                         child: Text(
-                                          () {
-                                            if (listViewTranferHistoryListRecord
-                                                    .status ==
-                                                0) {
-                                              return 'ระบบกำลังประมวลผล';
-                                            } else if (listViewTranferHistoryListRecord
-                                                    .status ==
-                                                1) {
-                                              return 'สำเร็จ';
-                                            } else {
-                                              return '-';
-                                            }
-                                          }(),
+                                          listViewOrderListRecord.productStatus,
                                           style: FlutterFlowTheme.of(context)
                                               .bodyMedium
                                               .override(
                                                 fontFamily: 'Readex Pro',
                                                 color: () {
-                                                  if (listViewTranferHistoryListRecord
-                                                          .status ==
-                                                      0) {
+                                                  if (listViewOrderListRecord
+                                                          .productStatus ==
+                                                      'รอประกาศผล') {
                                                     return FlutterFlowTheme.of(
                                                             context)
                                                         .tertiary;
-                                                  } else if (listViewTranferHistoryListRecord
-                                                          .status ==
-                                                      1) {
+                                                  } else if (listViewOrderListRecord
+                                                          .productStatus ==
+                                                      'ถูกรางวัล') {
                                                     return FlutterFlowTheme.of(
                                                             context)
                                                         .success;
                                                   } else {
-                                                    return Color(0x00000000);
+                                                    return FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryText;
                                                   }
                                                 }(),
                                               ),

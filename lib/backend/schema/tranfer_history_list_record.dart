@@ -41,12 +41,18 @@ class TranferHistoryListRecord extends FirestoreRecord {
   int get status => _status ?? 0;
   bool hasStatus() => _status != null;
 
+  // "order_ref" field.
+  DocumentReference? _orderRef;
+  DocumentReference? get orderRef => _orderRef;
+  bool hasOrderRef() => _orderRef != null;
+
   void _initializeFields() {
     _createDate = snapshotData['create_date'] as DateTime?;
     _createBy = snapshotData['create_by'] as DocumentReference?;
     _credit = castToType<double>(snapshotData['credit']);
     _type = snapshotData['type'] as String?;
     _status = castToType<int>(snapshotData['status']);
+    _orderRef = snapshotData['order_ref'] as DocumentReference?;
   }
 
   static CollectionReference get collection =>
@@ -90,6 +96,7 @@ Map<String, dynamic> createTranferHistoryListRecordData({
   double? credit,
   String? type,
   int? status,
+  DocumentReference? orderRef,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -98,6 +105,7 @@ Map<String, dynamic> createTranferHistoryListRecordData({
       'credit': credit,
       'type': type,
       'status': status,
+      'order_ref': orderRef,
     }.withoutNulls,
   );
 
@@ -114,12 +122,13 @@ class TranferHistoryListRecordDocumentEquality
         e1?.createBy == e2?.createBy &&
         e1?.credit == e2?.credit &&
         e1?.type == e2?.type &&
-        e1?.status == e2?.status;
+        e1?.status == e2?.status &&
+        e1?.orderRef == e2?.orderRef;
   }
 
   @override
-  int hash(TranferHistoryListRecord? e) => const ListEquality()
-      .hash([e?.createDate, e?.createBy, e?.credit, e?.type, e?.status]);
+  int hash(TranferHistoryListRecord? e) => const ListEquality().hash(
+      [e?.createDate, e?.createBy, e?.credit, e?.type, e?.status, e?.orderRef]);
 
   @override
   bool isValidKey(Object? o) => o is TranferHistoryListRecord;
