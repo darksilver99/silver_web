@@ -9,6 +9,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class PaymentViewModel extends FlutterFlowModel<PaymentViewWidget> {
+  ///  Local state fields for this component.
+
+  String? qrPath;
+
+  bool paymentSuccess = false;
+
   /// Initialization and disposal methods.
 
   void initState(BuildContext context) {}
