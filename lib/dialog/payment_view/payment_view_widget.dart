@@ -1,10 +1,10 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_web_view.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_html/flutter_html.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'payment_view_model.dart';
@@ -98,9 +98,13 @@ class _PaymentViewWidgetState extends State<PaymentViewWidget> {
                   ),
                 ),
                 if (_model.qrPath != null && _model.qrPath != '')
-                  Html(
-                    data: _model.qrPath!,
-                    onLinkTap: (url, _, __, ___) => launchURL(url!),
+                  FlutterFlowWebView(
+                    content: _model.qrPath!,
+                    bypass: false,
+                    width: MediaQuery.sizeOf(context).width * 1.0,
+                    height: 420.0,
+                    verticalScroll: false,
+                    horizontalScroll: false,
                   ),
                 FFButtonWidget(
                   onPressed: () {
