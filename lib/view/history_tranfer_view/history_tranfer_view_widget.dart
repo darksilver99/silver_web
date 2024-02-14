@@ -82,8 +82,43 @@ class _HistoryTranferViewWidgetState extends State<HistoryTranferViewWidget> {
                     ),
                   ),
                   Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(32.0, 0.0, 32.0, 0.0),
+                    padding: EdgeInsetsDirectional.fromSTEB(
+                        valueOrDefault<double>(
+                          () {
+                            if (MediaQuery.sizeOf(context).width <
+                                kBreakpointSmall) {
+                              return 16.0;
+                            } else if (MediaQuery.sizeOf(context).width <
+                                kBreakpointMedium) {
+                              return 16.0;
+                            } else if (MediaQuery.sizeOf(context).width <
+                                kBreakpointLarge) {
+                              return 32.0;
+                            } else {
+                              return 32.0;
+                            }
+                          }(),
+                          0.0,
+                        ),
+                        0.0,
+                        valueOrDefault<double>(
+                          () {
+                            if (MediaQuery.sizeOf(context).width <
+                                kBreakpointSmall) {
+                              return 16.0;
+                            } else if (MediaQuery.sizeOf(context).width <
+                                kBreakpointMedium) {
+                              return 16.0;
+                            } else if (MediaQuery.sizeOf(context).width <
+                                kBreakpointLarge) {
+                              return 32.0;
+                            } else {
+                              return 32.0;
+                            }
+                          }(),
+                          0.0,
+                        ),
+                        0.0),
                     child: PagedListView<DocumentSnapshot<Object?>?,
                         TranferHistoryListRecord>(
                       pagingController: _model.setListViewController(
@@ -144,75 +179,83 @@ class _HistoryTranferViewWidgetState extends State<HistoryTranferViewWidget> {
                                 padding: EdgeInsets.all(16.0),
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
-                                    Text(
-                                      '${listViewTranferHistoryListRecord.type} ${formatNumber(
-                                        listViewTranferHistoryListRecord.credit,
-                                        formatType: FormatType.decimal,
-                                        decimalType: DecimalType.automatic,
-                                      )} บาท',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .override(
-                                            fontFamily: 'Readex Pro',
-                                            color: () {
-                                              if (listViewTranferHistoryListRecord
-                                                      .status ==
-                                                  0) {
-                                                return FlutterFlowTheme.of(
-                                                        context)
-                                                    .tertiary;
-                                              } else if (listViewTranferHistoryListRecord
-                                                      .status ==
-                                                  1) {
-                                                return FlutterFlowTheme.of(
-                                                        context)
-                                                    .success;
-                                              } else {
-                                                return Color(0x00000000);
-                                              }
-                                            }(),
-                                            fontSize: 22.0,
-                                          ),
+                                    Expanded(
+                                      child: Text(
+                                        '${listViewTranferHistoryListRecord.type} ${formatNumber(
+                                          listViewTranferHistoryListRecord
+                                              .credit,
+                                          formatType: FormatType.decimal,
+                                          decimalType: DecimalType.automatic,
+                                        )} บาท',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              color: () {
+                                                if (listViewTranferHistoryListRecord
+                                                        .status ==
+                                                    0) {
+                                                  return FlutterFlowTheme.of(
+                                                          context)
+                                                      .tertiary;
+                                                } else if (listViewTranferHistoryListRecord
+                                                        .status ==
+                                                    1) {
+                                                  return FlutterFlowTheme.of(
+                                                          context)
+                                                      .success;
+                                                } else {
+                                                  return Color(0x00000000);
+                                                }
+                                              }(),
+                                              fontSize: 22.0,
+                                            ),
+                                      ),
                                     ),
-                                    Text(
-                                      () {
-                                        if (listViewTranferHistoryListRecord
-                                                .status ==
-                                            0) {
-                                          return 'ระบบกำลังประมวลผล';
-                                        } else if (listViewTranferHistoryListRecord
-                                                .status ==
-                                            1) {
-                                          return 'สำเร็จ';
-                                        } else {
-                                          return '-';
-                                        }
-                                      }(),
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .override(
-                                            fontFamily: 'Readex Pro',
-                                            color: () {
-                                              if (listViewTranferHistoryListRecord
-                                                      .status ==
-                                                  0) {
-                                                return FlutterFlowTheme.of(
-                                                        context)
-                                                    .tertiary;
-                                              } else if (listViewTranferHistoryListRecord
-                                                      .status ==
-                                                  1) {
-                                                return FlutterFlowTheme.of(
-                                                        context)
-                                                    .success;
-                                              } else {
-                                                return Color(0x00000000);
-                                              }
-                                            }(),
-                                          ),
+                                    Expanded(
+                                      child: Align(
+                                        alignment:
+                                            AlignmentDirectional(1.0, 0.0),
+                                        child: Text(
+                                          () {
+                                            if (listViewTranferHistoryListRecord
+                                                    .status ==
+                                                0) {
+                                              return 'ระบบกำลังประมวลผล';
+                                            } else if (listViewTranferHistoryListRecord
+                                                    .status ==
+                                                1) {
+                                              return 'สำเร็จ';
+                                            } else {
+                                              return '-';
+                                            }
+                                          }(),
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .override(
+                                                fontFamily: 'Readex Pro',
+                                                color: () {
+                                                  if (listViewTranferHistoryListRecord
+                                                          .status ==
+                                                      0) {
+                                                    return FlutterFlowTheme.of(
+                                                            context)
+                                                        .tertiary;
+                                                  } else if (listViewTranferHistoryListRecord
+                                                          .status ==
+                                                      1) {
+                                                    return FlutterFlowTheme.of(
+                                                            context)
+                                                        .success;
+                                                  } else {
+                                                    return Color(0x00000000);
+                                                  }
+                                                }(),
+                                              ),
+                                        ),
+                                      ),
                                     ),
                                   ],
                                 ),
