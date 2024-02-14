@@ -8,7 +8,6 @@ import '/view/home_view/home_view_widget.dart';
 import '/view/order_view/order_view_widget.dart';
 import '/view/withdraw_view/withdraw_view_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -31,13 +30,6 @@ class _MainPageWidgetState extends State<MainPageWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => MainPageModel());
-
-    // On page load action.
-    SchedulerBinding.instance.addPostFrameCallback((_) async {
-      setState(() {
-        _model.pageView = FFAppState().currentPage;
-      });
-    });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -257,7 +249,7 @@ class _MainPageWidgetState extends State<MainPageWidget> {
                         }
 
                         setState(() {
-                          _model.pageView = 'homeView';
+                          FFAppState().currentPage = 'homeView';
                         });
                       },
                       child: Container(
@@ -321,7 +313,7 @@ class _MainPageWidgetState extends State<MainPageWidget> {
                         }
 
                         setState(() {
-                          _model.pageView = 'withdrawView';
+                          FFAppState().currentPage = 'withdrawView';
                         });
                       },
                       child: Container(
@@ -385,7 +377,7 @@ class _MainPageWidgetState extends State<MainPageWidget> {
                         }
 
                         setState(() {
-                          _model.pageView = 'historyTranferView';
+                          FFAppState().currentPage = 'histroyTranferView';
                         });
                       },
                       child: Container(
@@ -539,25 +531,25 @@ class _MainPageWidgetState extends State<MainPageWidget> {
                     mainAxisSize: MainAxisSize.max,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      if (_model.pageView == 'homeView')
+                      if (FFAppState().currentPage == 'homeView')
                         wrapWithModel(
                           model: _model.homeViewModel,
                           updateCallback: () => setState(() {}),
                           child: HomeViewWidget(),
                         ),
-                      if (_model.pageView == 'withdrawView')
+                      if (FFAppState().currentPage == 'withdrawView')
                         wrapWithModel(
                           model: _model.withdrawViewModel,
                           updateCallback: () => setState(() {}),
                           child: WithdrawViewWidget(),
                         ),
-                      if (_model.pageView == 'historyTranferView')
+                      if (FFAppState().currentPage == 'historyTranferView')
                         wrapWithModel(
                           model: _model.historyTranferViewModel,
                           updateCallback: () => setState(() {}),
                           child: HistoryTranferViewWidget(),
                         ),
-                      if (_model.pageView == 'orderView')
+                      if (FFAppState().currentPage == 'orderView')
                         wrapWithModel(
                           model: _model.orderViewModel,
                           updateCallback: () => setState(() {}),

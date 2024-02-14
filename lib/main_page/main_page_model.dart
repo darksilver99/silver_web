@@ -9,16 +9,11 @@ import '/view/order_view/order_view_widget.dart';
 import '/view/withdraw_view/withdraw_view_widget.dart';
 import 'main_page_widget.dart' show MainPageWidget;
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class MainPageModel extends FlutterFlowModel<MainPageWidget> {
-  ///  Local state fields for this page.
-
-  String pageView = '';
-
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
