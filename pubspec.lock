@@ -525,6 +525,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.2"
+  omise_flutter:
+    dependency: "direct main"
+    description:
+      name: omise_flutter
+      sha256: "097cc7bc6960fad8cd7368f5756c5e6e9328b9377513398ff0d717ecee08d438"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.6"
   package_config:
     dependency: transitive
     description:

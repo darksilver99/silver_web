@@ -9,6 +9,11 @@ import 'package:provider/provider.dart';
 import 'payment_view_model.dart';
 export 'payment_view_model.dart';
 
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'package:omise_flutter/omise_flutter.dart';
+import 'dart:developer';
+
 class PaymentViewWidget extends StatefulWidget {
   const PaymentViewWidget({super.key});
 
@@ -18,6 +23,9 @@ class PaymentViewWidget extends StatefulWidget {
 
 class _PaymentViewWidgetState extends State<PaymentViewWidget> {
   late PaymentViewModel _model;
+
+  static const publicKey = "pkey_test_5x1h5fbuqkwm8g53lm0";
+  OmiseFlutter omise = OmiseFlutter(publicKey);
 
   @override
   void setState(VoidCallback callback) {
@@ -43,6 +51,80 @@ class _PaymentViewWidgetState extends State<PaymentViewWidget> {
     _model.maybeDispose();
 
     super.dispose();
+  }
+
+  String basicAuth(publicKey) {
+    return 'Basic ${base64Encode(utf8.encode('$publicKey:'))}';
+  }
+
+  exampleCreateSource() async {
+    print(">>>>>>>>>>>>>>exampleCreateSource");
+    try {
+      final source = await omise.source.create(10000, "THB", "promptpay");
+      print("source.id : ${source.id}");
+      /*print("source.object : ${source.object}");
+      print("source.id : ${source.id}");
+      print("source.livemode : ${source.livemode}");
+      print("source.location : ${source.location}");
+      print("source.createdAt : ${source.createdAt}");
+      print("source.type : ${source.type}");
+      print("source.flow : ${source.flow}");
+      print("source.amount : ${source.amount}");
+      print("source.currency : ${source.currency}");
+      print("source.mobileNumber : ${source.mobileNumber}");
+      print("source.phoneNumber : ${source.phoneNumber}");
+      print("source.references : ${source.references}");
+      print("source.name : ${source.name}");
+      print("source.email : ${source.email}");
+      print("source.barcode : ${source.barcode}");
+      print("source.storeId : ${source.storeId}");
+      print("source.storeName : ${source.storeName}");
+      print("source.terminalId : ${source.terminalId}");
+      print("source.installmentTerm : ${source.installmentTerm}");
+      print("source.zeroInterestInstallments : ${source.zeroInterestInstallments}");
+      print("source.scannableCode : ${source.scannableCode}");*/
+      //exampleRetrieveCapability();
+      payment(source.id);
+    } catch (e) {
+      // error(e);
+      print(e);
+    }
+  }
+
+  payment(token) async {
+    const url = 'https://api.omise.co/charges';
+
+    // อันนี้ได้
+    Map<String, String> header = {
+      'Authorization': basicAuth("skey_test_5x1cv8dk84i1twgjbxv"),
+      'Omise-Version': '2019-05-29',
+      'Cache-Control': 'no-cache',
+      'Content-Type': 'application/json',
+      'user-agent': 'co.keerati.omise_flutter/0.1.6'
+    };
+
+    print("header");
+    print(header);
+
+    var requestBody = {
+      'source': token,
+      'amount': "10000",
+      'currency': "THB",
+    };
+
+    print("requestBody");
+    print(requestBody);
+
+    var response = await http.post(Uri.parse(url), body: jsonEncode(requestBody), headers: header);
+
+    if (response.statusCode == 200) {
+      print('Upload successful!');
+      //print('Photo URL: ${response.body}');
+      log(response.body);
+    } else {
+      print('Upload failed with status code: ${response.statusCode}');
+      print('${response.body}');
+    }
   }
 
   @override
@@ -99,6 +181,7 @@ class _PaymentViewWidgetState extends State<PaymentViewWidget> {
                 FFButtonWidget(
                   onPressed: () {
                     print('Button pressed ...');
+                    exampleCreateSource();
                   },
                   text: 'Processing...',
                   options: FFButtonOptions(
