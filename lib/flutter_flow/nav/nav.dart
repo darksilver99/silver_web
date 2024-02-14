@@ -90,6 +90,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'MainPage',
           path: '/mainPage',
+          requireAuth: true,
           builder: (context, params) => MainPageWidget(),
         ),
         FFRoute(
