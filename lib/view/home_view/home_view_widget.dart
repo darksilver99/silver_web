@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:webviewx_plus/webviewx_plus.dart';
 import 'home_view_model.dart';
 export 'home_view_model.dart';
 
@@ -76,7 +77,9 @@ class _HomeViewWidgetState extends State<HomeViewWidget> {
                                 backgroundColor: Colors.transparent,
                                 alignment: AlignmentDirectional(0.0, 0.0)
                                     .resolve(Directionality.of(context)),
-                                child: BuyViewWidget(),
+                                child: WebViewAware(
+                                  child: BuyViewWidget(),
+                                ),
                               );
                             },
                           ).then((value) => setState(() {}));
