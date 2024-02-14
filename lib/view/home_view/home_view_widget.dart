@@ -1,4 +1,4 @@
-import '/dialog/but_view/but_view_widget.dart';
+import '/dialog/buy_view/buy_view_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
@@ -76,7 +76,7 @@ class _HomeViewWidgetState extends State<HomeViewWidget> {
                                 backgroundColor: Colors.transparent,
                                 alignment: AlignmentDirectional(0.0, 0.0)
                                     .resolve(Directionality.of(context)),
-                                child: ButViewWidget(),
+                                child: BuyViewWidget(),
                               );
                             },
                           ).then((value) => setState(() {}));

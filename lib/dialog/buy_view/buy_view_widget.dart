@@ -12,18 +12,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'but_view_model.dart';
-export 'but_view_model.dart';
+import 'buy_view_model.dart';
+export 'buy_view_model.dart';
 
-class ButViewWidget extends StatefulWidget {
-  const ButViewWidget({super.key});
+class BuyViewWidget extends StatefulWidget {
+  const BuyViewWidget({super.key});
 
   @override
-  State<ButViewWidget> createState() => _ButViewWidgetState();
+  State<BuyViewWidget> createState() => _BuyViewWidgetState();
 }
 
-class _ButViewWidgetState extends State<ButViewWidget> {
-  late ButViewModel _model;
+class _BuyViewWidgetState extends State<BuyViewWidget> {
+  late BuyViewModel _model;
 
   @override
   void setState(VoidCallback callback) {
@@ -34,7 +34,7 @@ class _ButViewWidgetState extends State<ButViewWidget> {
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => ButViewModel());
+    _model = createModel(context, () => BuyViewModel());
 
     _model.textController ??= TextEditingController();
     _model.textFieldFocusNode ??= FocusNode();

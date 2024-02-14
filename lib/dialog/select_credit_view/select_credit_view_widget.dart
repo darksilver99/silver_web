@@ -129,19 +129,30 @@ class _SelectCreditViewWidgetState extends State<SelectCreditViewWidget> {
                         ),
                       });
 
-                      await TranferHistoryListRecord.collection
-                          .doc()
+                      var tranferHistoryListRecordReference =
+                          TranferHistoryListRecord.collection.doc();
+                      await tranferHistoryListRecordReference
                           .set(createTranferHistoryListRecordData(
-                            createDate: getCurrentTimestamp,
-                            createBy: currentUserReference,
-                            credit: 300.0,
-                            type: 'ฝาก',
-                            status: 1,
-                          ));
-                      await actions.pushReplacementNamed(
-                        context,
-                      );
+                        createDate: getCurrentTimestamp,
+                        createBy: currentUserReference,
+                        credit: 300.0,
+                        type: 'ฝาก',
+                        status: 0,
+                      ));
+                      _model.tranferRef =
+                          TranferHistoryListRecord.getDocumentFromData(
+                              createTranferHistoryListRecordData(
+                                createDate: getCurrentTimestamp,
+                                createBy: currentUserReference,
+                                credit: 300.0,
+                                type: 'ฝาก',
+                                status: 0,
+                              ),
+                              tranferHistoryListRecordReference);
+                      Navigator.pop(context, true);
                     }
+
+                    setState(() {});
                   },
                   child: Material(
                     color: Colors.transparent,
