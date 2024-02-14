@@ -49,9 +49,9 @@ class _SelectCreditViewWidgetState extends State<SelectCreditViewWidget> {
       child: Container(
         width: () {
           if (MediaQuery.sizeOf(context).width < kBreakpointSmall) {
-            return MediaQuery.sizeOf(context).width;
+            return (MediaQuery.sizeOf(context).width * 0.8);
           } else if (MediaQuery.sizeOf(context).width < kBreakpointMedium) {
-            return MediaQuery.sizeOf(context).width;
+            return (MediaQuery.sizeOf(context).width * 0.8);
           } else if (MediaQuery.sizeOf(context).width < kBreakpointLarge) {
             return 500.0;
           } else {
