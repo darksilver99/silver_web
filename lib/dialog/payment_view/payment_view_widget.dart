@@ -45,12 +45,7 @@ class _PaymentViewWidgetState extends State<PaymentViewWidget> {
     // On component load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       setState(() {});
-
-      await FFAppState()
-          .tranferReferent!
-          .update(createTranferHistoryListRecordData(
-            paymentId: _model.paymentID,
-          ));
+      exampleCreateSource();
     });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
@@ -139,6 +134,13 @@ class _PaymentViewWidgetState extends State<PaymentViewWidget> {
         print("_model.qrPath");
         print(_model.qrPath);
       });
+
+      _model.paymentID = jsonData["id"];
+      await FFAppState()
+          .tranferReferent!
+          .update(createTranferHistoryListRecordData(
+        paymentId: _model.paymentID,
+      ));
 
     } else {
       print('failed with status code: ${response.statusCode}');
