@@ -33,9 +33,7 @@ class _PaymentViewWidgetState extends State<PaymentViewWidget> {
 
     // On component load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      setState(() {
-        _model.qrPath = 'https://picsum.photos/seed/995/600';
-      });
+      setState(() {});
     });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
