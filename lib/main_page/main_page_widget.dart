@@ -3,6 +3,7 @@ import '/components/select_credit_view_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/view/history_tranfer_view/history_tranfer_view_widget.dart';
 import '/view/home_view/home_view_widget.dart';
 import '/view/setting_view/setting_view_widget.dart';
 import 'package:flutter/material.dart';
@@ -364,6 +365,70 @@ class _MainPageWidgetState extends State<MainPageWidget> {
                   hoverColor: Colors.transparent,
                   highlightColor: Colors.transparent,
                   onTap: () async {
+                    if (scaffoldKey.currentState!.isDrawerOpen ||
+                        scaffoldKey.currentState!.isEndDrawerOpen) {
+                      Navigator.pop(context);
+                    }
+
+                    setState(() {
+                      _model.pageView = 'historyTranferView';
+                    });
+                  },
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Container(
+                        width: double.infinity,
+                        height: 60.0,
+                        decoration: BoxDecoration(
+                          color:
+                              FlutterFlowTheme.of(context).secondaryBackground,
+                        ),
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              16.0, 0.0, 16.0, 0.0),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 0.0, 8.0, 0.0),
+                                child: Icon(
+                                  Icons.history_rounded,
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryText,
+                                  size: 18.0,
+                                ),
+                              ),
+                              Text(
+                                'ประวัติการ ฝาก-ถอน เงิน',
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                      fontFamily: 'Readex Pro',
+                                      fontSize: 18.0,
+                                    ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Container(
+                        width: double.infinity,
+                        height: 1.0,
+                        decoration: BoxDecoration(
+                          color: FlutterFlowTheme.of(context).alternate,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                InkWell(
+                  splashColor: Colors.transparent,
+                  focusColor: Colors.transparent,
+                  hoverColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  onTap: () async {
                     GoRouter.of(context).prepareAuthEvent();
                     await authManager.signOut();
                     GoRouter.of(context).clearRedirectLocation();
@@ -445,6 +510,12 @@ class _MainPageWidgetState extends State<MainPageWidget> {
                           model: _model.settingViewModel,
                           updateCallback: () => setState(() {}),
                           child: SettingViewWidget(),
+                        ),
+                      if (_model.pageView == 'historyTranferView')
+                        wrapWithModel(
+                          model: _model.historyTranferViewModel,
+                          updateCallback: () => setState(() {}),
+                          child: HistoryTranferViewWidget(),
                         ),
                     ]
                         .addToStart(SizedBox(height: 16.0))

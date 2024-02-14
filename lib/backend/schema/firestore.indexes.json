@@ -1,3 +1,18 @@
 {
-  "indexes": []
+  "indexes": [
+    {
+      "collectionGroup": "tranfer_history_list",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "create_by",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "create_date",
+          "order": "DESCENDING"
+        }
+      ]
+    }
+  ]
 }

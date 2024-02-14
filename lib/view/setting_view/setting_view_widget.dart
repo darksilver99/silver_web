@@ -87,20 +87,22 @@ class _SettingViewWidgetState extends State<SettingViewWidget> {
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              AuthUserStreamWidget(
-                                builder: (context) => Text(
-                                  'ยอดเงินคงเหลือ ${formatNumber(
-                                    valueOrDefault(
-                                        currentUserDocument?.credit, 0.0),
-                                    formatType: FormatType.decimal,
-                                    decimalType: DecimalType.automatic,
-                                  )}',
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        fontFamily: 'Readex Pro',
-                                        fontSize: 32.0,
-                                      ),
+                              Expanded(
+                                child: AuthUserStreamWidget(
+                                  builder: (context) => Text(
+                                    'ยอดเงินคงเหลือ ${formatNumber(
+                                      valueOrDefault(
+                                          currentUserDocument?.credit, 0.0),
+                                      formatType: FormatType.decimal,
+                                      decimalType: DecimalType.automatic,
+                                    )}',
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily: 'Readex Pro',
+                                          fontSize: 32.0,
+                                        ),
+                                  ),
                                 ),
                               ),
                             ],
