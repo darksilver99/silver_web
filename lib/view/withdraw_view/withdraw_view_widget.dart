@@ -9,18 +9,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'setting_view_model.dart';
-export 'setting_view_model.dart';
+import 'withdraw_view_model.dart';
+export 'withdraw_view_model.dart';
 
-class SettingViewWidget extends StatefulWidget {
-  const SettingViewWidget({super.key});
+class WithdrawViewWidget extends StatefulWidget {
+  const WithdrawViewWidget({super.key});
 
   @override
-  State<SettingViewWidget> createState() => _SettingViewWidgetState();
+  State<WithdrawViewWidget> createState() => _WithdrawViewWidgetState();
 }
 
-class _SettingViewWidgetState extends State<SettingViewWidget> {
-  late SettingViewModel _model;
+class _WithdrawViewWidgetState extends State<WithdrawViewWidget> {
+  late WithdrawViewModel _model;
 
   @override
   void setState(VoidCallback callback) {
@@ -31,7 +31,7 @@ class _SettingViewWidgetState extends State<SettingViewWidget> {
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => SettingViewModel());
+    _model = createModel(context, () => WithdrawViewModel());
 
     _model.textController ??= TextEditingController();
     _model.textFieldFocusNode ??= FocusNode();
@@ -48,6 +48,8 @@ class _SettingViewWidgetState extends State<SettingViewWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return SingleChildScrollView(
       primary: false,
       child: Column(

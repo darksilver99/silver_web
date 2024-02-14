@@ -44,6 +44,8 @@ class _SelectCreditViewWidgetState extends State<SelectCreditViewWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Align(
       alignment: AlignmentDirectional(0.0, 0.0),
       child: Container(

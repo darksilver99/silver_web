@@ -5,8 +5,10 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/view/history_tranfer_view/history_tranfer_view_widget.dart';
 import '/view/home_view/home_view_widget.dart';
-import '/view/setting_view/setting_view_widget.dart';
+import '/view/order_view/order_view_widget.dart';
+import '/view/withdraw_view/withdraw_view_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -30,6 +32,13 @@ class _MainPageWidgetState extends State<MainPageWidget> {
     super.initState();
     _model = createModel(context, () => MainPageModel());
 
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      setState(() {
+        _model.pageView = FFAppState().currentPage;
+      });
+    });
+
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
@@ -50,6 +59,8 @@ class _MainPageWidgetState extends State<MainPageWidget> {
         ),
       );
     }
+
+    context.watch<FFAppState>();
 
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
@@ -310,7 +321,7 @@ class _MainPageWidgetState extends State<MainPageWidget> {
                         }
 
                         setState(() {
-                          _model.pageView = 'settingView';
+                          _model.pageView = 'withdrawView';
                         });
                       },
                       child: Container(
@@ -534,17 +545,23 @@ class _MainPageWidgetState extends State<MainPageWidget> {
                           updateCallback: () => setState(() {}),
                           child: HomeViewWidget(),
                         ),
-                      if (_model.pageView == 'settingView')
+                      if (_model.pageView == 'withdrawView')
                         wrapWithModel(
-                          model: _model.settingViewModel,
+                          model: _model.withdrawViewModel,
                           updateCallback: () => setState(() {}),
-                          child: SettingViewWidget(),
+                          child: WithdrawViewWidget(),
                         ),
                       if (_model.pageView == 'historyTranferView')
                         wrapWithModel(
                           model: _model.historyTranferViewModel,
                           updateCallback: () => setState(() {}),
                           child: HistoryTranferViewWidget(),
+                        ),
+                      if (_model.pageView == 'orderView')
+                        wrapWithModel(
+                          model: _model.orderViewModel,
+                          updateCallback: () => setState(() {}),
+                          child: OrderViewWidget(),
                         ),
                     ]
                         .addToStart(SizedBox(height: 16.0))

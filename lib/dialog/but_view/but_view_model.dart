@@ -1,20 +1,23 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/form_field_controller.dart';
 import '/custom_code/actions/index.dart' as actions;
-import 'setting_view_widget.dart' show SettingViewWidget;
+import '/flutter_flow/custom_functions.dart' as functions;
+import 'but_view_widget.dart' show ButViewWidget;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class SettingViewModel extends FlutterFlowModel<SettingViewWidget> {
+class ButViewModel extends FlutterFlowModel<ButViewWidget> {
   ///  Local state fields for this component.
 
-  double? withdrawCredit;
+  double? selectPrice;
 
   ///  State fields for stateful widgets in this component.
 
@@ -30,6 +33,12 @@ class SettingViewModel extends FlutterFlowModel<SettingViewWidget> {
 
     return null;
   }
+
+  // State field(s) for DropDown widget.
+  String? dropDownValue;
+  FormFieldController<String>? dropDownValueController;
+  // Stores action output result for [Backend Call - Create Document] action in Button widget.
+  OrderListRecord? orderRef;
 
   /// Initialization and disposal methods.
 
