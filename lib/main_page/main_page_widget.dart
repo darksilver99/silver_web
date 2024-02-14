@@ -377,7 +377,7 @@ class _MainPageWidgetState extends State<MainPageWidget> {
                         }
 
                         setState(() {
-                          FFAppState().currentPage = 'histroyTranferView';
+                          FFAppState().currentPage = 'historyTranferView';
                         });
                       },
                       child: Container(
