@@ -2,7 +2,6 @@ import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/custom_code/actions/index.dart' as actions;
 import 'select_credit_view_widget.dart' show SelectCreditViewWidget;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +15,10 @@ class SelectCreditViewModel extends FlutterFlowModel<SelectCreditViewWidget> {
 
   // Stores action output result for [Backend Call - Create Document] action in Container widget.
   TranferHistoryListRecord? tranferRef;
+  // Stores action output result for [Backend Call - Create Document] action in Container widget.
+  TranferHistoryListRecord? tranferRef2;
+  // Stores action output result for [Backend Call - Create Document] action in Container widget.
+  TranferHistoryListRecord? tranferRef3;
 
   /// Initialization and disposal methods.
 
