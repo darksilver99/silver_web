@@ -93,6 +93,7 @@ dependencies:
 
   #custom
   omise_flutter: ^0.1.6
+  dio: ^5.4.0
 
 dev_dependencies:
   flutter_lints: 3.0.0

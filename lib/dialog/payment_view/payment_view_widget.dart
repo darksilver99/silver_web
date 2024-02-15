@@ -1,3 +1,5 @@
+import 'package:dio/dio.dart';
+
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -99,7 +101,7 @@ class _PaymentViewWidgetState extends State<PaymentViewWidget> {
   payment(token) async {
     const url = 'https://api.omise.co/charges';
 
-    // อันนี้ได้
+    // อันนี้ได้ ไปแกะ package มันมา
     Map<String, String> header = {
       'Authorization': basicAuth("skey_test_5x1cv8dk84i1twgjbxv"),
       'Omise-Version': '2019-05-29',
@@ -121,6 +123,7 @@ class _PaymentViewWidgetState extends State<PaymentViewWidget> {
     print(requestBody);
 
     var response = await http.post(Uri.parse(url), body: jsonEncode(requestBody), headers: header);
+    //var response = await Dio().post(url, options: Options(headers: header), data: requestBody);
 
     if (response.statusCode == 200) {
       print('successful!');
