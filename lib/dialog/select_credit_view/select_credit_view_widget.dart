@@ -123,14 +123,6 @@ class _SelectCreditViewWidgetState extends State<SelectCreditViewWidget> {
                         ) ??
                         false;
                     if (confirmDialogResponse) {
-                      await currentUserReference!.update({
-                        ...mapToFirestore(
-                          {
-                            'credit': FieldValue.increment(300.0),
-                          },
-                        ),
-                      });
-
                       var tranferHistoryListRecordReference =
                           TranferHistoryListRecord.collection.doc();
                       await tranferHistoryListRecordReference
@@ -213,14 +205,6 @@ class _SelectCreditViewWidgetState extends State<SelectCreditViewWidget> {
                         ) ??
                         false;
                     if (confirmDialogResponse) {
-                      await currentUserReference!.update({
-                        ...mapToFirestore(
-                          {
-                            'credit': FieldValue.increment(500.0),
-                          },
-                        ),
-                      });
-
                       var tranferHistoryListRecordReference =
                           TranferHistoryListRecord.collection.doc();
                       await tranferHistoryListRecordReference
@@ -303,14 +287,6 @@ class _SelectCreditViewWidgetState extends State<SelectCreditViewWidget> {
                         ) ??
                         false;
                     if (confirmDialogResponse) {
-                      await currentUserReference!.update({
-                        ...mapToFirestore(
-                          {
-                            'credit': FieldValue.increment(1000.0),
-                          },
-                        ),
-                      });
-
                       var tranferHistoryListRecordReference =
                           TranferHistoryListRecord.collection.doc();
                       await tranferHistoryListRecordReference
