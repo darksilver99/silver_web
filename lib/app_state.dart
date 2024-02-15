@@ -34,4 +34,10 @@ class FFAppState extends ChangeNotifier {
   set tranferReferent(DocumentReference? _value) {
     _tranferReferent = _value;
   }
+
+  String _creditSelected = '';
+  String get creditSelected => _creditSelected;
+  set creditSelected(String _value) {
+    _creditSelected = _value;
+  }
 }
