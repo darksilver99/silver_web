@@ -181,7 +181,9 @@ class _HistoryTranferViewWidgetState extends State<HistoryTranferViewWidget> {
                                                               .of(context)
                                                           .success;
                                                     } else {
-                                                      return Color(0x00000000);
+                                                      return FlutterFlowTheme
+                                                              .of(context)
+                                                          .error;
                                                     }
                                                   }(),
                                                   fontSize: 22.0,
@@ -216,6 +218,10 @@ class _HistoryTranferViewWidgetState extends State<HistoryTranferViewWidget> {
                                                     .status ==
                                                 1) {
                                               return 'สำเร็จ';
+                                            } else if (listViewTranferHistoryListRecord
+                                                    .status ==
+                                                2) {
+                                              return 'ยกเลิก';
                                             } else {
                                               return '-';
                                             }
@@ -238,7 +244,9 @@ class _HistoryTranferViewWidgetState extends State<HistoryTranferViewWidget> {
                                                             context)
                                                         .success;
                                                   } else {
-                                                    return Color(0x00000000);
+                                                    return FlutterFlowTheme.of(
+                                                            context)
+                                                        .error;
                                                   }
                                                 }(),
                                               ),
