@@ -224,6 +224,8 @@ class _MainPageWidgetState extends State<MainPageWidget> {
 
                                                 FFAppState().tranferReferent =
                                                     null;
+                                                FFAppState().creditSelected =
+                                                    '';
                                                 await actions
                                                     .pushReplacementNamed(
                                                   context,
