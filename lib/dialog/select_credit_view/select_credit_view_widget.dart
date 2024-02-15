@@ -213,7 +213,7 @@ class _SelectCreditViewWidgetState extends State<SelectCreditViewWidget> {
                         createBy: currentUserReference,
                         credit: 500.0,
                         type: 'ฝาก',
-                        status: 1,
+                        status: 0,
                       ));
                       _model.tranferRef2 =
                           TranferHistoryListRecord.getDocumentFromData(
@@ -222,7 +222,7 @@ class _SelectCreditViewWidgetState extends State<SelectCreditViewWidget> {
                                 createBy: currentUserReference,
                                 credit: 500.0,
                                 type: 'ฝาก',
-                                status: 1,
+                                status: 0,
                               ),
                               tranferHistoryListRecordReference);
                       FFAppState().tranferReferent =
@@ -295,7 +295,7 @@ class _SelectCreditViewWidgetState extends State<SelectCreditViewWidget> {
                         createBy: currentUserReference,
                         credit: 1000.0,
                         type: 'ฝาก',
-                        status: 1,
+                        status: 0,
                       ));
                       _model.tranferRef3 =
                           TranferHistoryListRecord.getDocumentFromData(
@@ -304,7 +304,7 @@ class _SelectCreditViewWidgetState extends State<SelectCreditViewWidget> {
                                 createBy: currentUserReference,
                                 credit: 1000.0,
                                 type: 'ฝาก',
-                                status: 1,
+                                status: 0,
                               ),
                               tranferHistoryListRecordReference);
                       FFAppState().tranferReferent =
