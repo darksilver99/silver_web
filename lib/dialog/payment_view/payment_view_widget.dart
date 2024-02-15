@@ -65,7 +65,7 @@ class _PaymentViewWidgetState extends State<PaymentViewWidget> {
   exampleCreateSource() async {
     print(">>>>>>>>>>>>>>exampleCreateSource");
     try {
-      final source = await omise.source.create(10000, "THB", "promptpay");
+      final source = await omise.source.create(int.parse(FFAppState().creditSelected), "THB", "promptpay");
       print("source.id : ${source.id}");
       /*print("source.object : ${source.object}");
       print("source.id : ${source.id}");
@@ -113,7 +113,7 @@ class _PaymentViewWidgetState extends State<PaymentViewWidget> {
 
     var requestBody = {
       'source': token,
-      'amount': "10000",
+      'amount': FFAppState().creditSelected,
       'currency': "THB",
     };
 
