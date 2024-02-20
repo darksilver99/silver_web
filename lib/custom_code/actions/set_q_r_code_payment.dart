@@ -8,7 +8,15 @@ import 'package:flutter/material.dart';
 // Begin custom action code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
-Future<String> setQRCodePayment(DocumentReference? paymentRef) async {
+import '/flutter_flow/custom_functions.dart' as functions;
+import 'package:omise_flutter/omise_flutter.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
+Future<String> setQRCodePayment(
+  DocumentReference? paymentRef,
+  String? price,
+) async {
   // Add your function code here!
 
   var url = '';
@@ -19,8 +27,8 @@ Future<String> setQRCodePayment(DocumentReference? paymentRef) async {
   print("secretKey");
   print(FFAppState().price);
   try {
-    final source =
-        await omise.source.create(FFAppState().price, "THB", "promptpay");
+    final source = await omise.source
+        .create(functions.stringToInt(price!), "THB", "promptpay");
 
     const urlOmise = 'https://api.omise.co/charges';
 
@@ -40,7 +48,7 @@ Future<String> setQRCodePayment(DocumentReference? paymentRef) async {
 
     var requestBody = {
       'source': source.id,
-      'amount': FFAppState().price.toString(),
+      'amount': price!.toString(),
       'currency': "THB",
       'description': "ระบบเว็บ (SilverService)",
     };
@@ -61,7 +69,7 @@ Future<String> setQRCodePayment(DocumentReference? paymentRef) async {
           "https://silver-api.com/qr.php?path=${jsonData["source"]["scannable_code"]["image"]["download_uri"].toString().replaceAll("https://", "")}";
 
       var paymentID = jsonData["id"];
-      await paymentRef!.update(createTranferHistoryListRecordData(
+      await paymentRef!.update(createPaymentHistoryListRecordData(
         paymentOrder: paymentID,
       ));
     } else {
