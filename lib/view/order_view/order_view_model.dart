@@ -21,8 +21,10 @@ class OrderViewModel extends FlutterFlowModel<OrderViewWidget> {
 
   /// Initialization and disposal methods.
 
+  @override
   void initState(BuildContext context) {}
 
+  @override
   void dispose() {
     listViewStreamSubscriptions.forEach((s) => s?.cancel());
     listViewPagingController?.dispose();

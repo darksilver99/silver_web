@@ -22,3 +22,12 @@ bool? containsOnlyDigits(String? str) {
   }
   return RegExp(r'^[0-9]+$').hasMatch(str);
 }
+
+String? removeLastTwoZero(String? price) {
+  String numberString = price!.toString();
+  return numberString.substring(0, numberString.length - 2);
+}
+
+int? stringToInt(String? str) {
+  return int.parse(str!);
+}

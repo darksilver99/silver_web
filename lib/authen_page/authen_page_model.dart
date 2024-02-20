@@ -94,6 +94,7 @@ class AuthenPageModel extends FlutterFlowModel<AuthenPageWidget> {
 
   /// Initialization and disposal methods.
 
+  @override
   void initState(BuildContext context) {
     emailTextController1Validator = _emailTextController1Validator;
     passwordVisibility1 = false;
@@ -107,6 +108,7 @@ class AuthenPageModel extends FlutterFlowModel<AuthenPageWidget> {
     textController2Validator = _textController2Validator;
   }
 
+  @override
   void dispose() {
     unfocusNode.dispose();
     textFieldFocusNode1?.dispose();
