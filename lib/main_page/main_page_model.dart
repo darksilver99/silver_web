@@ -33,6 +33,7 @@ class MainPageModel extends FlutterFlowModel<MainPageWidget> {
 
   /// Initialization and disposal methods.
 
+  @override
   void initState(BuildContext context) {
     homeViewModel = createModel(context, () => HomeViewModel());
     withdrawViewModel = createModel(context, () => WithdrawViewModel());
@@ -41,6 +42,7 @@ class MainPageModel extends FlutterFlowModel<MainPageWidget> {
     orderViewModel = createModel(context, () => OrderViewModel());
   }
 
+  @override
   void dispose() {
     unfocusNode.dispose();
     homeViewModel.dispose();

@@ -11,8 +11,10 @@ import 'package:webviewx_plus/webviewx_plus.dart';
 class HomeViewModel extends FlutterFlowModel<HomeViewWidget> {
   /// Initialization and disposal methods.
 
+  @override
   void initState(BuildContext context) {}
 
+  @override
   void dispose() {}
 
   /// Action blocks are added here.

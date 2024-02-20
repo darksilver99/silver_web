@@ -22,8 +22,10 @@ class HistoryTranferViewModel
 
   /// Initialization and disposal methods.
 
+  @override
   void initState(BuildContext context) {}
 
+  @override
   void dispose() {
     listViewStreamSubscriptions.forEach((s) => s?.cancel());
     listViewPagingController?.dispose();

@@ -50,10 +50,12 @@ class BuyViewModel extends FlutterFlowModel<BuyViewWidget> {
 
   /// Initialization and disposal methods.
 
+  @override
   void initState(BuildContext context) {
     textControllerValidator = _textControllerValidator;
   }
 
+  @override
   void dispose() {
     textFieldFocusNode?.dispose();
     textController?.dispose();
