@@ -1,8 +1,5 @@
-import '/auth/firebase_auth/auth_util.dart';
-import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -123,31 +120,9 @@ class _SelectCreditViewWidgetState extends State<SelectCreditViewWidget> {
                         ) ??
                         false;
                     if (confirmDialogResponse) {
-                      var tranferHistoryListRecordReference =
-                          TranferHistoryListRecord.collection.doc();
-                      await tranferHistoryListRecordReference
-                          .set(createTranferHistoryListRecordData(
-                        createDate: getCurrentTimestamp,
-                        createBy: currentUserReference,
-                        credit: 300.0,
-                        type: 'ฝาก',
-                        status: 0,
-                      ));
-                      _model.tranferRef =
-                          TranferHistoryListRecord.getDocumentFromData(
-                              createTranferHistoryListRecordData(
-                                createDate: getCurrentTimestamp,
-                                createBy: currentUserReference,
-                                credit: 300.0,
-                                type: 'ฝาก',
-                                status: 0,
-                              ),
-                              tranferHistoryListRecordReference);
                       FFAppState().creditSelected = '30000';
                       Navigator.pop(context, true);
                     }
-
-                    setState(() {});
                   },
                   child: Material(
                     color: Colors.transparent,
@@ -203,33 +178,9 @@ class _SelectCreditViewWidgetState extends State<SelectCreditViewWidget> {
                         ) ??
                         false;
                     if (confirmDialogResponse) {
-                      var tranferHistoryListRecordReference =
-                          TranferHistoryListRecord.collection.doc();
-                      await tranferHistoryListRecordReference
-                          .set(createTranferHistoryListRecordData(
-                        createDate: getCurrentTimestamp,
-                        createBy: currentUserReference,
-                        credit: 500.0,
-                        type: 'ฝาก',
-                        status: 0,
-                      ));
-                      _model.tranferRef2 =
-                          TranferHistoryListRecord.getDocumentFromData(
-                              createTranferHistoryListRecordData(
-                                createDate: getCurrentTimestamp,
-                                createBy: currentUserReference,
-                                credit: 500.0,
-                                type: 'ฝาก',
-                                status: 0,
-                              ),
-                              tranferHistoryListRecordReference);
-                      FFAppState().tranferReferent =
-                          _model.tranferRef2?.reference;
                       FFAppState().creditSelected = '50000';
                       Navigator.pop(context, true);
                     }
-
-                    setState(() {});
                   },
                   child: Material(
                     color: Colors.transparent,
@@ -285,33 +236,9 @@ class _SelectCreditViewWidgetState extends State<SelectCreditViewWidget> {
                         ) ??
                         false;
                     if (confirmDialogResponse) {
-                      var tranferHistoryListRecordReference =
-                          TranferHistoryListRecord.collection.doc();
-                      await tranferHistoryListRecordReference
-                          .set(createTranferHistoryListRecordData(
-                        createDate: getCurrentTimestamp,
-                        createBy: currentUserReference,
-                        credit: 1000.0,
-                        type: 'ฝาก',
-                        status: 0,
-                      ));
-                      _model.tranferRef3 =
-                          TranferHistoryListRecord.getDocumentFromData(
-                              createTranferHistoryListRecordData(
-                                createDate: getCurrentTimestamp,
-                                createBy: currentUserReference,
-                                credit: 1000.0,
-                                type: 'ฝาก',
-                                status: 0,
-                              ),
-                              tranferHistoryListRecordReference);
-                      FFAppState().tranferReferent =
-                          _model.tranferRef3?.reference;
                       FFAppState().creditSelected = '100000';
                       Navigator.pop(context, true);
                     }
-
-                    setState(() {});
                   },
                   child: Material(
                     color: Colors.transparent,
