@@ -41,10 +41,10 @@ class TranferHistoryListRecord extends FirestoreRecord {
   int get status => _status ?? 0;
   bool hasStatus() => _status != null;
 
-  // "order_ref" field.
-  DocumentReference? _orderRef;
-  DocumentReference? get orderRef => _orderRef;
-  bool hasOrderRef() => _orderRef != null;
+  // "payment_ref" field.
+  DocumentReference? _paymentRef;
+  DocumentReference? get paymentRef => _paymentRef;
+  bool hasPaymentRef() => _paymentRef != null;
 
   void _initializeFields() {
     _createDate = snapshotData['create_date'] as DateTime?;
@@ -52,7 +52,7 @@ class TranferHistoryListRecord extends FirestoreRecord {
     _credit = castToType<double>(snapshotData['credit']);
     _type = snapshotData['type'] as String?;
     _status = castToType<int>(snapshotData['status']);
-    _orderRef = snapshotData['order_ref'] as DocumentReference?;
+    _paymentRef = snapshotData['payment_ref'] as DocumentReference?;
   }
 
   static CollectionReference get collection =>
@@ -96,7 +96,7 @@ Map<String, dynamic> createTranferHistoryListRecordData({
   double? credit,
   String? type,
   int? status,
-  DocumentReference? orderRef,
+  DocumentReference? paymentRef,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -105,7 +105,7 @@ Map<String, dynamic> createTranferHistoryListRecordData({
       'credit': credit,
       'type': type,
       'status': status,
-      'order_ref': orderRef,
+      'payment_ref': paymentRef,
     }.withoutNulls,
   );
 
@@ -123,12 +123,18 @@ class TranferHistoryListRecordDocumentEquality
         e1?.credit == e2?.credit &&
         e1?.type == e2?.type &&
         e1?.status == e2?.status &&
-        e1?.orderRef == e2?.orderRef;
+        e1?.paymentRef == e2?.paymentRef;
   }
 
   @override
-  int hash(TranferHistoryListRecord? e) => const ListEquality().hash(
-      [e?.createDate, e?.createBy, e?.credit, e?.type, e?.status, e?.orderRef]);
+  int hash(TranferHistoryListRecord? e) => const ListEquality().hash([
+        e?.createDate,
+        e?.createBy,
+        e?.credit,
+        e?.type,
+        e?.status,
+        e?.paymentRef
+      ]);
 
   @override
   bool isValidKey(Object? o) => o is TranferHistoryListRecord;

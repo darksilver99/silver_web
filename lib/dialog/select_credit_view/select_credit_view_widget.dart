@@ -143,8 +143,6 @@ class _SelectCreditViewWidgetState extends State<SelectCreditViewWidget> {
                                 status: 0,
                               ),
                               tranferHistoryListRecordReference);
-                      FFAppState().tranferReferent =
-                          _model.tranferRef?.reference;
                       FFAppState().creditSelected = '30000';
                       Navigator.pop(context, true);
                     }

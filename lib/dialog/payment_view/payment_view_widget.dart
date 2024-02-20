@@ -60,6 +60,18 @@ class _PaymentViewWidgetState extends State<PaymentViewWidget> {
             paymentType: 'qrCode',
           ),
           paymentHistoryListRecordReference);
+
+      await TranferHistoryListRecord.collection
+          .doc()
+          .set(createTranferHistoryListRecordData(
+            createDate: getCurrentTimestamp,
+            createBy: currentUserReference,
+            credit: functions.stringToDouble(
+                functions.removeLastTwoZero(FFAppState().creditSelected)),
+            type: 'ฝาก',
+            status: 0,
+            paymentRef: _model.tmpPaymentRef?.reference,
+          ));
       setState(() {
         _model.paymentRef = _model.tmpPaymentRef?.reference;
       });
