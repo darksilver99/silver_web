@@ -65,6 +65,7 @@ class _PaymentViewWidgetState extends State<PaymentViewWidget> {
       });
       _model.rsURL = await actions.setQRCodePayment(
         _model.tmpPaymentRef?.reference,
+        FFAppState().creditSelected,
       );
       setState(() {
         _model.url = _model.rsURL;
