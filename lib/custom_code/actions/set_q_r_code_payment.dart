@@ -25,10 +25,9 @@ Future<String> setQRCodePayment(
 
   OmiseFlutter omise = OmiseFlutter(publicKey);
   print("secretKey");
-  print(FFAppState().price);
   try {
     final source = await omise.source
-        .create(functions.stringToInt(price!), "THB", "promptpay");
+        .create(functions.stringToInt(price)!, "THB", "promptpay");
 
     const urlOmise = 'https://api.omise.co/charges';
 

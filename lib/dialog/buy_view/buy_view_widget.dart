@@ -289,7 +289,6 @@ class _BuyViewWidgetState extends State<BuyViewWidget> {
                                           .stringToDouble(_model.dropDownValue),
                                       type: 'ซื้อเลข',
                                       status: 1,
-                                      orderRef: _model.orderRef?.reference,
                                     ));
                                 await showDialog(
                                   context: context,
