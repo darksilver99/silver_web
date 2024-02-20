@@ -61,9 +61,20 @@ class _PaymentViewWidgetState extends State<PaymentViewWidget> {
           ),
           paymentHistoryListRecordReference);
 
-      await TranferHistoryListRecord.collection
-          .doc()
+      var tranferHistoryListRecordReference =
+          TranferHistoryListRecord.collection.doc();
+      await tranferHistoryListRecordReference
           .set(createTranferHistoryListRecordData(
+        createDate: getCurrentTimestamp,
+        createBy: currentUserReference,
+        credit: functions.stringToDouble(
+            functions.removeLastTwoZero(FFAppState().creditSelected)),
+        type: 'ฝาก',
+        status: 0,
+        paymentRef: _model.tmpPaymentRef?.reference,
+      ));
+      _model.tranferRef = TranferHistoryListRecord.getDocumentFromData(
+          createTranferHistoryListRecordData(
             createDate: getCurrentTimestamp,
             createBy: currentUserReference,
             credit: functions.stringToDouble(
@@ -71,7 +82,9 @@ class _PaymentViewWidgetState extends State<PaymentViewWidget> {
             type: 'ฝาก',
             status: 0,
             paymentRef: _model.tmpPaymentRef?.reference,
-          ));
+          ),
+          tranferHistoryListRecordReference);
+      FFAppState().tranferReferent = _model.tranferRef?.reference;
       setState(() {
         _model.paymentRef = _model.tmpPaymentRef?.reference;
       });

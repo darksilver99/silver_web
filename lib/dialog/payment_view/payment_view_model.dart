@@ -26,6 +26,8 @@ class PaymentViewModel extends FlutterFlowModel<PaymentViewWidget> {
 
   // Stores action output result for [Backend Call - Create Document] action in PaymentView widget.
   PaymentHistoryListRecord? tmpPaymentRef;
+  // Stores action output result for [Backend Call - Create Document] action in PaymentView widget.
+  TranferHistoryListRecord? tranferRef;
   // Stores action output result for [Custom Action - setQRCodePayment] action in PaymentView widget.
   String? rsURL;
 
