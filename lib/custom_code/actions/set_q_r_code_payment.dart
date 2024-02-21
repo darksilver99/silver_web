@@ -42,8 +42,8 @@ Future<String> setQRCodePayment(
       'user-agent': 'co.keerati.omise_flutter/0.1.6'
     };
 
-    print("header");
-    print(header);
+    /*print("header");
+    print(header);*/
 
     var requestBody = {
       'source': source.id,
@@ -52,8 +52,8 @@ Future<String> setQRCodePayment(
       'description': "ระบบเว็บ (SilverService)",
     };
 
-    print("requestBody");
-    print(requestBody);
+    /*print("requestBody");
+    print(requestBody);*/
 
     var response = await http.post(Uri.parse(urlOmise),
         body: jsonEncode(requestBody), headers: header);
